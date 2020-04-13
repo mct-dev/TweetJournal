@@ -110,7 +110,6 @@ namespace TweetJournalApi.Controllers.V1
         {
             var entry = new Entry
             {
-                Id = new Guid(),
                 Content = entryRequest.Content,
                 CreatedDate = DateTime.Now,
                 ModifiedDate = DateTime.Now

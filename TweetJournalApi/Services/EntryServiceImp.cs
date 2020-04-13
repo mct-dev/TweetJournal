@@ -29,7 +29,8 @@ namespace TweetJournalApi.Services
         
         public async Task<bool> CreateAsync(Entry newEntry)
         {
-
+            await _entryContext.Entries.AddAsync(newEntry);
+            await _entryContext.SaveChangesAsync();
             return true;
         }
 
@@ -41,21 +42,19 @@ namespace TweetJournalApi.Services
                 return false;
             }
 
-            // TODO:
-
+            _entryContext.Entries.Update(updatedEntry);
             return true;
         }
 
         public async Task<bool> DeleteAsync(Guid entryId)
         {
-            var exists = await _entryContext.Entries.FindAsync(entryId);
-            if (exists == null)
+            var existingEntry = await _entryContext.Entries.FindAsync(entryId);
+            if (existingEntry == null)
             {
                 return false;
             }
 
-            // TODO:
-
+            _entryContext.Entries.Remove(existingEntry);
             return true;
         }
     }
