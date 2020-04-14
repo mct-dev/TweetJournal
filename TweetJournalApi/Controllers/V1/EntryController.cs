@@ -25,8 +25,8 @@ namespace TweetJournalApi.Controllers.V1
         [SwaggerResponse(200)]
         public async Task<ActionResult<List<EntryResponse>>> GetAll()
         {
-            var posts = await _entryService.GetAsync();
-            var postsResponse = posts.Select(p => new EntryResponse
+            var entries = await _entryService.GetAsync();
+            var entriesResponse = entries.Select(p => new EntryResponse
             {
                 Id = p.Id,
                 Content = p.Content,
@@ -34,67 +34,67 @@ namespace TweetJournalApi.Controllers.V1
                 CreatedDate = p.CreatedDate
             });
 
-            return Ok(postsResponse);
+            return Ok(entriesResponse);
         }
 
         [HttpGet(ApiRoutes.Entry.GetOne)]
         [SwaggerResponse(404)]
         [SwaggerResponse(200)]
-        public async Task<ActionResult<EntryResponse>> GetOne([FromRoute] Guid postId)
+        public async Task<ActionResult<EntryResponse>> GetOne([FromRoute] Guid entryId)
         {
-            var post = await _entryService.GetByIdAsync(postId);
+            var entry = await _entryService.GetByIdAsync(entryId);
 
-            if (post == null)
+            if (entry == null)
             {
                 return NotFound();
             }
 
-            var postResponse = new EntryResponse
+            var entryResponse = new EntryResponse
             {
-                Id = post.Id,
-                Content = post.Content,
-                CreatedDate = post.CreatedDate,
-                ModifiedDate = post.ModifiedDate
+                Id = entry.Id,
+                Content = entry.Content,
+                CreatedDate = entry.CreatedDate,
+                ModifiedDate = entry.ModifiedDate
             };
 
-            return Ok(postResponse);
+            return Ok(entryResponse);
         }
 
         [HttpPut(ApiRoutes.Entry.Update)]
         [SwaggerResponse(404)]
         [SwaggerResponse(200)]
-        public async Task<ActionResult<EntryResponse>> Update([FromRoute] Guid postId, [FromBody] UpdateEntryRequest request)
+        public async Task<ActionResult<EntryResponse>> Update([FromRoute] Guid entryId, [FromBody] UpdateEntryRequest entryRequest)
         {
-            var updatedPost = new Entry
+            var updatedEntry = new Entry
             {
-                Id = postId,
-                Content = request.Content,
+                Id = entryId,
+                Content = entryRequest.Content,
                 ModifiedDate = DateTime.Now
             };
 
-            var successful = await _entryService.UpdateAsync(updatedPost);
+            var successful = await _entryService.UpdateAsync(updatedEntry);
             if (!successful)
             {
                 return NotFound();
             }
 
-            var postResponse = new EntryResponse
+            var entryResponse = new EntryResponse
             {
-                Id = updatedPost.Id,
-                Content = updatedPost.Content,
-                CreatedDate = updatedPost.CreatedDate,
-                ModifiedDate = updatedPost.ModifiedDate
+                Id = updatedEntry.Id,
+                Content = updatedEntry.Content,
+                CreatedDate = updatedEntry.CreatedDate,
+                ModifiedDate = updatedEntry.ModifiedDate
             };
 
-            return Ok(postResponse);
+            return Ok(entryResponse);
         }
 
         [HttpDelete(ApiRoutes.Entry.Delete)]
         [SwaggerResponse(404, "Item with provided id was not found.")]
         [SwaggerResponse(204, "Item was deleted.")]
-        public async Task<ActionResult> Delete([FromRoute] Guid postId)
+        public async Task<ActionResult> Delete([FromRoute] Guid entryId)
         {
-            var successful = await _entryService.DeleteAsync(postId);
+            var successful = await _entryService.DeleteAsync(entryId);
 
             if (!successful)
             {
@@ -115,16 +115,11 @@ namespace TweetJournalApi.Controllers.V1
                 ModifiedDate = DateTime.Now
             };
 
-            var wasCreated = await _entryService.CreateAsync(entry);
-
-            if (!wasCreated)
-            {
-                throw new Exception("Problem! Entry was not created!");
-            }
+            await _entryService.CreateAsync(entry);
 
             var postResponse = new EntryResponse { Id = entry.Id, Content = entry.Content, CreatedDate = entry.CreatedDate };
             var baseUrl = $"{HttpContext.Request.Scheme}://{HttpContext.Request.Host.ToUriComponent()}";
-            var locationUri = baseUrl + "/" + ApiRoutes.Entry.GetOne.Replace("{postId}", entry.Id.ToString());
+            var locationUri = baseUrl + "/" + ApiRoutes.Entry.GetOne.Replace("{entryId}", entry.Id.ToString());
 
             return Created(locationUri, postResponse);
         }

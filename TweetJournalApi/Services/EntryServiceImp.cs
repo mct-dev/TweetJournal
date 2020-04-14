@@ -19,7 +19,7 @@ namespace TweetJournalApi.Services
 
         public async Task<Entry> GetByIdAsync(Guid id)
         {
-            return await _entryContext.Entries.FindAsync(id);
+            return await _entryContext.Entries.SingleOrDefaultAsync(e => e.Id == id);
         }
         
         public async Task<List<Entry>> GetAsync()
@@ -30,32 +30,28 @@ namespace TweetJournalApi.Services
         public async Task<bool> CreateAsync(Entry newEntry)
         {
             await _entryContext.Entries.AddAsync(newEntry);
-            await _entryContext.SaveChangesAsync();
-            return true;
+            var numberOfUpdates = await _entryContext.SaveChangesAsync();
+            return numberOfUpdates > 0;
         }
 
         public async Task<bool> UpdateAsync(Entry updatedEntry)
         {
-            var exists = await _entryContext.Entries.FindAsync(updatedEntry.Id);
-            if (exists == null)
-            {
-                return false;
-            }
-
             _entryContext.Entries.Update(updatedEntry);
-            return true;
+            var numberOfUpdates = await _entryContext.SaveChangesAsync();
+            return numberOfUpdates > 0;
         }
 
         public async Task<bool> DeleteAsync(Guid entryId)
         {
-            var existingEntry = await _entryContext.Entries.FindAsync(entryId);
+            var existingEntry = await GetByIdAsync(entryId);
             if (existingEntry == null)
             {
                 return false;
             }
 
             _entryContext.Entries.Remove(existingEntry);
-            return true;
+            var numberOfUpdates = await _entryContext.SaveChangesAsync();
+            return numberOfUpdates > 0;
         }
     }
 }
