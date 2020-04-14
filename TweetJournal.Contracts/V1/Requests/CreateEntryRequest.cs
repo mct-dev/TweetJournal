@@ -1,4 +1,4 @@
-﻿namespace TweetJournalApi.Contracts.V1.Requests
+﻿namespace TweetJournal.Contracts.V1.Requests
 {
     public class CreateEntryRequest
     {

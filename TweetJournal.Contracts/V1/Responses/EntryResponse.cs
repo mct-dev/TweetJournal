@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TweetJournalApi.Contracts.V1.Responses
+namespace TweetJournal.Contracts.V1.Responses
 {
     public class EntryResponse
     {

@@ -4,9 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
-using TweetJournalApi.Contracts.V1;
-using TweetJournalApi.Contracts.V1.Requests;
-using TweetJournalApi.Contracts.V1.Responses;
+using TweetJournal.Contracts.V1;
+using TweetJournal.Contracts.V1.Requests;
+using TweetJournal.Contracts.V1.Responses;
 using TweetJournalApi.Domain;
 using TweetJournalApi.Services;
 

@@ -1,5 +1,5 @@
-﻿using TweetJournalApi.Contracts.V1;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using TweetJournal.Contracts.V1;
 
 namespace TweetJournalApi.Controllers.V1
 {

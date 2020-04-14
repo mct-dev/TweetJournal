@@ -1,4 +1,4 @@
-﻿namespace TweetJournalApi.Contracts.V1
+﻿namespace TweetJournal.Contracts.V1
 {
     public static class ApiRoutes
     {

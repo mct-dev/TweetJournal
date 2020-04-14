@@ -14,5 +14,13 @@
     <PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="5.3.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Contracts" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TweetJournal.Contracts\TweetJournal.Contracts.csproj" />
+  </ItemGroup>
+
 
 </Project>

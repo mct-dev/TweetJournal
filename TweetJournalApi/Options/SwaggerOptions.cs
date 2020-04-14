@@ -1,4 +1,4 @@
-﻿namespace TweetJournalApi.Swagger
+﻿namespace TweetJournalApi.Options
 {
     public class SwaggerOptions
     {
