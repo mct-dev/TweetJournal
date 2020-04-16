@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29926.136
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TweetJournalApi", "TweetJournalApi\TweetJournalApi.csproj", "{35297133-712D-4C7D-9668-1BEF8B848944}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TweetJournal.Api", "TweetJournal.Api\TweetJournal.Api.csproj", "{35297133-712D-4C7D-9668-1BEF8B848944}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TweetJournalWeb", "TweetJournalWeb\TweetJournalWeb.csproj", "{207E42F9-5136-4CB5-95C6-3AF1CA9165DE}"
 EndProject

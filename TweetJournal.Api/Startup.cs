@@ -36,6 +36,24 @@ namespace TweetJournalApi
                 app.UseHsts();
             }
 
+            UseSwagger(app);
+
+            app.UseAuthentication();
+            app.UseHttpsRedirection();
+            app.UseStaticFiles();
+            app.UseRouting();
+            app.UseAuthorization();
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
+            });
+        }
+
+        private void UseSwagger(IApplicationBuilder app)
+        {
             var swaggerOptions = new SwaggerOptions();
             Configuration.GetSection(nameof(SwaggerOptions)).Bind(swaggerOptions);
 
@@ -44,17 +62,6 @@ namespace TweetJournalApi
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint(swaggerOptions.UIEndpoint, swaggerOptions.Description);
-            });
-
-            app.UseHttpsRedirection();
-            app.UseStaticFiles();
-            app.UseRouting();
-            app.UseAuthorization();
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
             });
         }
     }

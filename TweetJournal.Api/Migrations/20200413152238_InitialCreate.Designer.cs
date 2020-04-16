@@ -217,7 +217,7 @@ namespace TweetJournalApi.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("TweetJournalApi.Domain.Entry", b =>
+            modelBuilder.Entity("TweetJournal.Api.Domain.Entry", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
