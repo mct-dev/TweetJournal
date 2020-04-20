@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace TweetJournalApi.Domain
+namespace TweetJournal.Api.Domain
 {
     [Table("Entries")]
     public class Entry

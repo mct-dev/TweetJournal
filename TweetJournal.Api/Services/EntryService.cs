@@ -1,10 +1,9 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using TweetJournalApi.Domain;
+using TweetJournal.Api.Domain;
 
-namespace TweetJournalApi.Services
+namespace TweetJournal.Api.Services
 {
     public interface EntryService
     {

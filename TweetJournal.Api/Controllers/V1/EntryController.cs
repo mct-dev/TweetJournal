@@ -2,17 +2,20 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
+using TweetJournal.Api.Domain;
+using TweetJournal.Api.Services;
 using TweetJournal.Contracts.V1;
 using TweetJournal.Contracts.V1.Requests;
 using TweetJournal.Contracts.V1.Responses;
-using TweetJournalApi.Domain;
-using TweetJournalApi.Services;
 
-namespace TweetJournalApi.Controllers.V1
+namespace TweetJournal.Api.Controllers.V1
 {
     [ApiController]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class EntryController : ControllerBase
     {
         private readonly EntryService _entryService;

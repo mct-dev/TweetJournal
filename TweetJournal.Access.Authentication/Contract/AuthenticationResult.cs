@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace TweetJournalApi.Domain
+namespace TweetJournal.Access.Authentication.Contract
 {
     public class AuthenticationResult
     {

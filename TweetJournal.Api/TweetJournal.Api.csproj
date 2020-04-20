@@ -2,7 +2,6 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <RootNamespace>TweetJournalApi</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
@@ -17,7 +16,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\TweetJournal.Access.Authentication\TweetJournal.Access.Authentication.csproj" />
     <ProjectReference Include="..\TweetJournal.Contracts\TweetJournal.Contracts.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Mapping" />
   </ItemGroup>
 
 

@@ -5,9 +5,15 @@ VisualStudioVersion = 16.0.29926.136
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TweetJournal.Api", "TweetJournal.Api\TweetJournal.Api.csproj", "{35297133-712D-4C7D-9668-1BEF8B848944}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TweetJournalWeb", "TweetJournalWeb\TweetJournalWeb.csproj", "{207E42F9-5136-4CB5-95C6-3AF1CA9165DE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TweetJournal.Web", "TweetJournal.Web\TweetJournal.Web.csproj", "{207E42F9-5136-4CB5-95C6-3AF1CA9165DE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TweetJournal.Contracts", "TweetJournal.Contracts\TweetJournal.Contracts.csproj", "{4138222A-9D38-4131-B9C1-A1B58C0E1F83}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TweetJournal.Access.Authentication", "TweetJournal.Access.Authentication\TweetJournal.Access.Authentication.csproj", "{56D65CEB-7942-4D78-95EC-A5682AFA32EB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{9D2BEBEB-3152-4188-B60E-B315CEB8EF63}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TweetJournal.Access.Authentication.Test", "Tests\TweetJournal.Access.Authentication.Test\TweetJournal.Access.Authentication.Test.csproj", "{A68A0BFC-A3E9-40E8-9B6C-A3180A2A35E0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,11 +33,22 @@ Global
 		{4138222A-9D38-4131-B9C1-A1B58C0E1F83}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4138222A-9D38-4131-B9C1-A1B58C0E1F83}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4138222A-9D38-4131-B9C1-A1B58C0E1F83}.Release|Any CPU.Build.0 = Release|Any CPU
+		{56D65CEB-7942-4D78-95EC-A5682AFA32EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{56D65CEB-7942-4D78-95EC-A5682AFA32EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{56D65CEB-7942-4D78-95EC-A5682AFA32EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{56D65CEB-7942-4D78-95EC-A5682AFA32EB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A68A0BFC-A3E9-40E8-9B6C-A3180A2A35E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A68A0BFC-A3E9-40E8-9B6C-A3180A2A35E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A68A0BFC-A3E9-40E8-9B6C-A3180A2A35E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A68A0BFC-A3E9-40E8-9B6C-A3180A2A35E0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {35DEC82D-21A6-4DA9-8892-D3A900545CFA}
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A68A0BFC-A3E9-40E8-9B6C-A3180A2A35E0} = {9D2BEBEB-3152-4188-B60E-B315CEB8EF63}
 	EndGlobalSection
 EndGlobal

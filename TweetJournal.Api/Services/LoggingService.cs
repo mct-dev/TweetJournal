@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TweetJournalApi.Services
+namespace TweetJournal.Api.Services
 {
     interface LoggingService
     {

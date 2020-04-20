@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using TweetJournalApi.Data;
-using TweetJournalApi.Domain;
+using TweetJournal.Api.Data;
+using TweetJournal.Api.Domain;
 
-namespace TweetJournalApi.Services
+namespace TweetJournal.Api.Services
 {
     public class EntryServiceImp : EntryService
     {

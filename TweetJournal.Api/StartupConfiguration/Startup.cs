@@ -1,12 +1,10 @@
-using TweetJournalApi.Installers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using TweetJournalApi.Options;
+using TweetJournal.Api.Options;
 
-namespace TweetJournalApi
+namespace TweetJournal.Api.StartupConfiguration
 {
     public class Startup
     {
@@ -17,42 +15,31 @@ namespace TweetJournalApi
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.InstallServicesInAssembly(Configuration);
+            ServiceInjection.InjectProductionServices(services, Configuration);
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-            else
-            {
-                app.UseExceptionHandler("/Home/Error");
-                app.UseHsts();
-            }
-
-            UseSwagger(app);
+            app.UseExceptionHandler("/Home/Error");
+            app.UseHsts();
 
             app.UseAuthentication();
             app.UseHttpsRedirection();
-            app.UseStaticFiles();
             app.UseRouting();
             app.UseAuthorization();
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
+            
+            UseSwagger(app);
         }
 
-        private void UseSwagger(IApplicationBuilder app)
+        public void UseSwagger(IApplicationBuilder app)
         {
             var swaggerOptions = new SwaggerOptions();
             Configuration.GetSection(nameof(SwaggerOptions)).Bind(swaggerOptions);

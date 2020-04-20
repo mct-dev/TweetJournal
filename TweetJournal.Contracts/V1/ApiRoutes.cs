@@ -15,7 +15,7 @@
             public const string Delete = Base + "/entry/{entryId}";
         }
 
-        public static class Identity
+        public static class Authentication
         {
             public const string Login = Base + "/identity/login";
             public const string Register = Base + "/identity/register";
