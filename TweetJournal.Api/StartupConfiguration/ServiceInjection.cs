@@ -1,11 +1,9 @@
 ﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
-using TweetJournal.Api.Data;
-using TweetJournal.Api.Services;
+using TweetJournal.Access.Entries;
 
 namespace TweetJournal.Api.StartupConfiguration
 {
@@ -23,19 +21,17 @@ namespace TweetJournal.Api.StartupConfiguration
         
         private static void InjectServices(IServiceCollection services, IConfiguration configuration, bool isDevelopment)
         {
-            var connectionString = configuration.GetConnectionString("EntriesDbContext");
 
             InstallMvc(services);
             InstallSwagger(services);
             
-            services.AddDbContext<EntryContext>(options =>
-                options.UseSqlServer(connectionString));
-            services.AddScoped<EntryService, EntryServiceImp>();
+
             services.AddIdentity<IdentityUser, IdentityRole>()
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<EntryContext>();
             
             Access.Authentication.ServiceInjection.ConfigureServices(services, configuration);
+            Access.Entries.ServiceInjection.ConfigureServices(services, configuration);
         }
         
         private static void InstallSwagger(IServiceCollection services)

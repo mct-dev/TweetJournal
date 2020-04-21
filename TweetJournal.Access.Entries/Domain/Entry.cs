@@ -1,13 +1,16 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
-namespace TweetJournal.Contracts.V1.Responses
+namespace TweetJournal.Access.Entries.Domain
 {
-    public class EntryResponse
+    [Table("Entries")]
+    public class Entry
     {
+        [Key]
         public Guid Id { get; set; }
         public string Content { get; set; }
         public DateTime CreatedDate { get; set; }
         public DateTime ModifiedDate { get; set; }
-
     }
 }

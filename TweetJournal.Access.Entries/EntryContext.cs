@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using TweetJournal.Api.Domain;
+using TweetJournal.Access.Entries.Domain;
 
-namespace TweetJournal.Api.Data
+namespace TweetJournal.Access.Entries
 {
     public class EntryContext : IdentityDbContext
     {

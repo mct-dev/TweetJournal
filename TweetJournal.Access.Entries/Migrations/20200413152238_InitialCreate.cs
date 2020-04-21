@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace TweetJournal.Api.Migrations
+namespace TweetJournal.Access.Entries.Migrations
 {
     public partial class InitialCreate : Migration
     {

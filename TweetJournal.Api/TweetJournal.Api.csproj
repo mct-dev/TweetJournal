@@ -6,21 +6,18 @@
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="9.0.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.3" />
-    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.3" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.3" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.3" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.3" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.3.1" />
     <PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="5.3.1" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\TweetJournal.Access.Authentication\TweetJournal.Access.Authentication.csproj" />
+    <ProjectReference Include="..\TweetJournal.Access.Entries\TweetJournal.Access.Entries.csproj" />
     <ProjectReference Include="..\TweetJournal.Contracts\TweetJournal.Contracts.csproj" />
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Contracts" />
     <Folder Include="Mapping" />
   </ItemGroup>
 

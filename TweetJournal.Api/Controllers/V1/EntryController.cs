@@ -6,11 +6,11 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
-using TweetJournal.Api.Domain;
-using TweetJournal.Api.Services;
-using TweetJournal.Contracts.V1;
-using TweetJournal.Contracts.V1.Requests;
-using TweetJournal.Contracts.V1.Responses;
+using TweetJournal.Access.Entries;
+using TweetJournal.Access.Entries.Domain;
+using TweetJournal.Api.Contracts.V1;
+using TweetJournal.Api.Contracts.V1.Requests;
+using TweetJournal.Api.Contracts.V1.Responses;
 
 namespace TweetJournal.Api.Controllers.V1
 {
@@ -18,17 +18,17 @@ namespace TweetJournal.Api.Controllers.V1
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class EntryController : ControllerBase
     {
-        private readonly EntryService _entryService;
-        public EntryController(EntryService entryService)
+        private readonly IEntryAccess _entryAccess;
+        public EntryController(IEntryAccess entryAccess)
         {
-            _entryService = entryService;
+            _entryAccess = entryAccess;
         }
 
         [HttpGet(ApiRoutes.Entry.GetAll)]
         [SwaggerResponse(200)]
         public async Task<ActionResult<List<EntryResponse>>> GetAll()
         {
-            var entries = await _entryService.GetAsync();
+            var entries = await _entryAccess.GetAsync();
             var entriesResponse = entries.Select(p => new EntryResponse
             {
                 Id = p.Id,
@@ -45,7 +45,7 @@ namespace TweetJournal.Api.Controllers.V1
         [SwaggerResponse(200)]
         public async Task<ActionResult<EntryResponse>> GetOne([FromRoute] Guid entryId)
         {
-            var entry = await _entryService.GetByIdAsync(entryId);
+            var entry = await _entryAccess.GetByIdAsync(entryId);
 
             if (entry == null)
             {
@@ -75,7 +75,7 @@ namespace TweetJournal.Api.Controllers.V1
                 ModifiedDate = DateTime.Now
             };
 
-            var successful = await _entryService.UpdateAsync(updatedEntry);
+            var successful = await _entryAccess.UpdateAsync(updatedEntry);
             if (!successful)
             {
                 return NotFound();
@@ -97,7 +97,7 @@ namespace TweetJournal.Api.Controllers.V1
         [SwaggerResponse(204, "Item was deleted.")]
         public async Task<ActionResult> Delete([FromRoute] Guid entryId)
         {
-            var successful = await _entryService.DeleteAsync(entryId);
+            var successful = await _entryAccess.DeleteAsync(entryId);
 
             if (!successful)
             {
@@ -118,7 +118,7 @@ namespace TweetJournal.Api.Controllers.V1
                 ModifiedDate = DateTime.Now
             };
 
-            await _entryService.CreateAsync(entry);
+            await _entryAccess.CreateAsync(entry);
 
             var postResponse = new EntryResponse { Id = entry.Id, Content = entry.Content, CreatedDate = entry.CreatedDate };
             var baseUrl = $"{HttpContext.Request.Scheme}://{HttpContext.Request.Host.ToUriComponent()}";

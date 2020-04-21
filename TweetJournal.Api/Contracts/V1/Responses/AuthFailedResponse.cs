@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace TweetJournal.Contracts.V1.Responses
+namespace TweetJournal.Api.Contracts.V1.Responses
 {
     public class AuthFailedResponse
     {

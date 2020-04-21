@@ -1,4 +1,4 @@
-﻿namespace TweetJournal.Contracts.V1.Requests
+﻿namespace TweetJournal.Api.Contracts.V1.Requests
 {
     public class UserRegistrationRequest
     {

@@ -4,14 +4,15 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using TweetJournal.Api.Data;
+using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace TweetJournal.Api.Migrations
+namespace TweetJournal.Access.Entries.Migrations
 {
     [DbContext(typeof(EntryContext))]
-    partial class EntryContextModelSnapshot : ModelSnapshot
+    [Migration("20200413152238_InitialCreate")]
+    partial class InitialCreate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -215,7 +216,7 @@ namespace TweetJournal.Api.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("TweetJournalApi.Domain.Entry", b =>
+            modelBuilder.Entity("TweetJournal.Api.Domain.Entry", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()

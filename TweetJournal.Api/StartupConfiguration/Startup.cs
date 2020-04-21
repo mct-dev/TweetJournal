@@ -39,7 +39,7 @@ namespace TweetJournal.Api.StartupConfiguration
             UseSwagger(app);
         }
 
-        public void UseSwagger(IApplicationBuilder app)
+        private void UseSwagger(IApplicationBuilder app)
         {
             var swaggerOptions = new SwaggerOptions();
             Configuration.GetSection(nameof(SwaggerOptions)).Bind(swaggerOptions);

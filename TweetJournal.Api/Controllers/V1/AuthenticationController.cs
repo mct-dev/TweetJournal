@@ -1,9 +1,9 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using TweetJournal.Access.Authentication;
-using TweetJournal.Contracts.V1;
-using TweetJournal.Contracts.V1.Requests;
-using TweetJournal.Contracts.V1.Responses;
+using TweetJournal.Api.Contracts.V1;
+using TweetJournal.Api.Contracts.V1.Requests;
+using TweetJournal.Api.Contracts.V1.Responses;
 
 namespace TweetJournal.Api.Controllers.V1
 {

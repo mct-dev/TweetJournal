@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using TweetJournal.Api.Domain;
+using TweetJournal.Access.Entries.Domain;
 
-namespace TweetJournal.Api.Services
+namespace TweetJournal.Access.Entries
 {
-    public interface EntryService
+    public interface IEntryAccess
     {
         Task<List<Entry>> GetAsync();
         Task<Entry> GetByIdAsync(Guid id);

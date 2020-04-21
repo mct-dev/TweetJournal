@@ -2,16 +2,15 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using TweetJournal.Api.Data;
-using TweetJournal.Api.Domain;
+using TweetJournal.Access.Entries.Domain;
 
-namespace TweetJournal.Api.Services
+namespace TweetJournal.Access.Entries
 {
-    public class EntryServiceImp : EntryService
+    public class EntryAccess : IEntryAccess
     {
         private readonly EntryContext _entryContext;
 
-        public EntryServiceImp(EntryContext entryContext)
+        public EntryAccess(EntryContext entryContext)
         {
             _entryContext = entryContext;
         }
