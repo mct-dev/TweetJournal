@@ -16,7 +16,7 @@ namespace TweetJournal.Access.Authentication
             
             services.AddSingleton<IJwtAccess, JwtAccess>();
             services.AddTransient<IUserAccess, UserAccess>();
-            services.AddScoped<IAuthenticationService, AuthenticationService>();
+            services.AddScoped<IAuthenticationAccess, AuthenticationAccess>();
             
             ConfigureJwtService(services, configuration);
             ConfigureIdentityOptions(services);

@@ -7,12 +7,12 @@ using TweetJournal.Access.Authentication.User;
 
 namespace TweetJournal.Access.Authentication
 {
-    public class AuthenticationService : IAuthenticationService
+    public class AuthenticationAccess : IAuthenticationAccess
     {
         private readonly IJwtAccess _jwtAccess;
         private readonly IUserAccess _userAccess;
 
-        public AuthenticationService(IJwtAccess jwtAccess, IUserAccess userAccess)
+        public AuthenticationAccess(IJwtAccess jwtAccess, IUserAccess userAccess)
         {
             _jwtAccess = jwtAccess;
             _userAccess = userAccess;
