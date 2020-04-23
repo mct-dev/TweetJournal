@@ -14,7 +14,6 @@
   <ItemGroup>
     <ProjectReference Include="..\TweetJournal.Access.Authentication\TweetJournal.Access.Authentication.csproj" />
     <ProjectReference Include="..\TweetJournal.Access.Entries\TweetJournal.Access.Entries.csproj" />
-    <ProjectReference Include="..\TweetJournal.Contracts\TweetJournal.Contracts.csproj" />
   </ItemGroup>
 
   <ItemGroup>
