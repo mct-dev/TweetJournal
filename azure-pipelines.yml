@@ -7,7 +7,7 @@ trigger:
 - master
 
 pool:
-  vmImage: 'windows-latest'
+  vmImage: 'ubuntu-18.04'
 
 variables:
   solution: '**/*.sln'
@@ -16,29 +16,34 @@ variables:
 
 steps:
 - task: UseDotNet@2
+  displayName: 'Use dotnet core 3.1.x'
   inputs:
     packageType: 'sdk'
     version: '3.1.x'
 
 - task: DotNetCoreCLI@2
+  displayName: 'Restore'
   inputs:
     command: 'restore'
     feedsToUse: 'select'
     vstsFeed: '9fa5dab7-22a4-44ed-be7c-8ec141221f9e'
 
 - task: DotNetCoreCLI@2
+  displayName: 'Build'
   inputs:
     command: 'build'
     projects: '$(solution)'
     arguments: '-c $(buildConfiguration) --no-restore --output $(build.artifactStagingDirectory)'
 
 - task: DotNetCoreCLI@2
+  displayName: 'Test'
   inputs:
     command: 'test'
     projects: '**/*.sln'
     arguments: '-c $(buildConfiguration) --no-restore --no-build'
 
 - task: PublishPipelineArtifact@1
+  displayName: 'Publish Artifact'
   inputs:
     targetPath: '$(build.artifactStagingDirectory)'
     artifact: 'TJ_Build_Artifact'
