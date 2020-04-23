@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TweetJournal.Access.Authent
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TweetJournal.Access.Entries", "TweetJournal.Access.Entries\TweetJournal.Access.Entries.csproj", "{13A11866-ED88-484B-8843-E7590D5B92F8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TweetJournal.Api.Tests", "Tests\TweetJournal.Api.Tests\TweetJournal.Api.Tests.csproj", "{42E5530E-4018-4E26-ADA6-EF08D4DF9178}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,6 +43,10 @@ Global
 		{13A11866-ED88-484B-8843-E7590D5B92F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{13A11866-ED88-484B-8843-E7590D5B92F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{13A11866-ED88-484B-8843-E7590D5B92F8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{42E5530E-4018-4E26-ADA6-EF08D4DF9178}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{42E5530E-4018-4E26-ADA6-EF08D4DF9178}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{42E5530E-4018-4E26-ADA6-EF08D4DF9178}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{42E5530E-4018-4E26-ADA6-EF08D4DF9178}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -50,5 +56,6 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{A68A0BFC-A3E9-40E8-9B6C-A3180A2A35E0} = {9D2BEBEB-3152-4188-B60E-B315CEB8EF63}
+		{42E5530E-4018-4E26-ADA6-EF08D4DF9178} = {9D2BEBEB-3152-4188-B60E-B315CEB8EF63}
 	EndGlobalSection
 EndGlobal

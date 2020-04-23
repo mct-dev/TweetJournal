@@ -1,21 +1,26 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
+using System.Reflection;
 using AutoMapper;
+using TweetJournal.Api.Mapping;
 
 namespace TweetJournal.Api
 {
     public static class AutoMapperConfiguration
     {
-        public static void RegisterMappings()
+        public static MapperConfiguration ConfigureMapper()
         {
             var config = new MapperConfiguration(c =>
             {
-                c.AddProfiles(GetMapperAssemblies());
+                c.AddMaps(GetMapperAssemblies());
             });
+
+            return config;
         }
 
-        private static IEnumerable<Profile> GetMapperAssemblies()
+        public static IEnumerable<Assembly> GetMapperAssemblies()
         {
-            yield return null;
+            yield return Assembly.GetExecutingAssembly();
         }
     }
 }

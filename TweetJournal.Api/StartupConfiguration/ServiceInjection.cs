@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
+using AutoMapper;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -7,6 +9,7 @@ using TweetJournal.Access.Entries;
 
 namespace TweetJournal.Api.StartupConfiguration
 {
+    [ExcludeFromCodeCoverage]
     internal static class ServiceInjection
     {
         public static void InjectDevelopmentServices(IServiceCollection services, IConfiguration configuration)
@@ -18,20 +21,24 @@ namespace TweetJournal.Api.StartupConfiguration
         {
             InjectServices(services, configuration, false);
         }
-        
+
         private static void InjectServices(IServiceCollection services, IConfiguration configuration, bool isDevelopment)
         {
 
             InstallMvc(services);
             InstallSwagger(services);
-            
-
-            services.AddIdentity<IdentityUser, IdentityRole>()
-                .AddRoles<IdentityRole>()
-                .AddEntityFrameworkStores<EntryContext>();
+            InstallEntryContextAndIdentity(services);
+            InstallAutoMapper(services, configuration);
             
             Access.Authentication.ServiceInjection.ConfigureServices(services, configuration);
             Access.Entries.ServiceInjection.ConfigureServices(services, configuration);
+        }
+
+        private static void InstallMvc(IServiceCollection services)
+        {
+            services.AddControllersWithViews();
+            services.AddMvcCore()
+                .AddApiExplorer();
         }
         
         private static void InstallSwagger(IServiceCollection services)
@@ -57,12 +64,17 @@ namespace TweetJournal.Api.StartupConfiguration
                 });
             });
         }
-        
-        private static void InstallMvc(IServiceCollection services)
+
+        private static void InstallEntryContextAndIdentity(IServiceCollection services)
         {
-            services.AddControllersWithViews();
-            services.AddMvcCore()
-                .AddApiExplorer();
+            services.AddIdentity<IdentityUser, IdentityRole>()
+                .AddRoles<IdentityRole>()
+                .AddEntityFrameworkStores<EntryContext>();
+        }
+
+        private static void InstallAutoMapper(IServiceCollection services, IConfiguration configuration)
+        {
+            services.AddAutoMapper(AutoMapperConfiguration.GetMapperAssemblies());
         }
     }
 }

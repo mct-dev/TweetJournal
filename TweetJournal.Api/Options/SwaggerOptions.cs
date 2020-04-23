@@ -1,5 +1,8 @@
-﻿namespace TweetJournal.Api.Options
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace TweetJournal.Api.Options
 {
+    [ExcludeFromCodeCoverage]
     public class SwaggerOptions
     {
         public string JsonRoute { get; set; }

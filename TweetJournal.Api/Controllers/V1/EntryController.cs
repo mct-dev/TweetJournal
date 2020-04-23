@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -11,6 +13,7 @@ using TweetJournal.Access.Entries.Domain;
 using TweetJournal.Api.Contracts.V1;
 using TweetJournal.Api.Contracts.V1.Requests;
 using TweetJournal.Api.Contracts.V1.Responses;
+using TweetJournal.Api.Exceptions;
 
 namespace TweetJournal.Api.Controllers.V1
 {
@@ -19,9 +22,12 @@ namespace TweetJournal.Api.Controllers.V1
     public class EntryController : ControllerBase
     {
         private readonly IEntryAccess _entryAccess;
-        public EntryController(IEntryAccess entryAccess)
+        private readonly IMapper _mapper;
+        
+        public EntryController(IEntryAccess entryAccess, IMapper mapper)
         {
             _entryAccess = entryAccess;
+            _mapper = mapper;
         }
 
         [HttpGet(ApiRoutes.Entry.GetAll)]
@@ -29,13 +35,17 @@ namespace TweetJournal.Api.Controllers.V1
         public async Task<ActionResult<List<EntryResponse>>> GetAll()
         {
             var entries = await _entryAccess.GetAsync();
-            var entriesResponse = entries.Select(p => new EntryResponse
-            {
-                Id = p.Id,
-                Content = p.Content,
-                ModifiedDate = p.ModifiedDate,
-                CreatedDate = p.CreatedDate
-            });
+            if (entries == null)
+                throw new RecordNotFoundException("Unable to find entry records.");
+
+            var entriesResponse = _mapper.Map<List<Entry>, IEnumerable<EntryResponse>>(entries);
+            // var entriesResponse = entries.Select(p => new EntryResponse
+            // {
+            //     Id = p.Id,
+            //     Content = p.Content,
+            //     ModifiedDate = p.ModifiedDate,
+            //     CreatedDate = p.CreatedDate
+            // });
 
             return Ok(entriesResponse);
         }

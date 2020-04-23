@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using System.Diagnostics.CodeAnalysis;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -6,6 +7,7 @@ using TweetJournal.Api.Options;
 
 namespace TweetJournal.Api.StartupConfiguration
 {
+    [ExcludeFromCodeCoverage]
     public class StartupDevelopment
     {
         public StartupDevelopment(IConfiguration configuration)
