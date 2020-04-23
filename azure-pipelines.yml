@@ -25,8 +25,6 @@ steps:
   displayName: 'Restore'
   inputs:
     command: 'restore'
-    feedsToUse: 'select'
-    vstsFeed: '9fa5dab7-22a4-44ed-be7c-8ec141221f9e'
 
 - task: DotNetCoreCLI@2
   displayName: 'Build'
