@@ -5,8 +5,6 @@ VisualStudioVersion = 16.0.29926.136
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TweetJournal.Api", "TweetJournal.Api\TweetJournal.Api.csproj", "{35297133-712D-4C7D-9668-1BEF8B848944}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TweetJournal.Web", "TweetJournal.Web\TweetJournal.Web.csproj", "{207E42F9-5136-4CB5-95C6-3AF1CA9165DE}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TweetJournal.Access.Authentication", "TweetJournal.Access.Authentication\TweetJournal.Access.Authentication.csproj", "{56D65CEB-7942-4D78-95EC-A5682AFA32EB}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{9D2BEBEB-3152-4188-B60E-B315CEB8EF63}"
@@ -27,10 +25,6 @@ Global
 		{35297133-712D-4C7D-9668-1BEF8B848944}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{35297133-712D-4C7D-9668-1BEF8B848944}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{35297133-712D-4C7D-9668-1BEF8B848944}.Release|Any CPU.Build.0 = Release|Any CPU
-		{207E42F9-5136-4CB5-95C6-3AF1CA9165DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{207E42F9-5136-4CB5-95C6-3AF1CA9165DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{207E42F9-5136-4CB5-95C6-3AF1CA9165DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{207E42F9-5136-4CB5-95C6-3AF1CA9165DE}.Release|Any CPU.Build.0 = Release|Any CPU
 		{56D65CEB-7942-4D78-95EC-A5682AFA32EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{56D65CEB-7942-4D78-95EC-A5682AFA32EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{56D65CEB-7942-4D78-95EC-A5682AFA32EB}.Release|Any CPU.ActiveCfg = Release|Any CPU

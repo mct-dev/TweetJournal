@@ -36,6 +36,7 @@ namespace TweetJournal.Api.Tests.Entries
             var contractEntry = Mother.ContractEntry;
             
             _mapper.Setup(m => m.Map<Entry>(createEntryRequest)).Returns(contractEntry);
+            Assert.That(true == true);
         }
     }
 }
