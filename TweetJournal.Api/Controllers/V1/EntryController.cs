@@ -36,7 +36,7 @@ namespace TweetJournal.Api.Controllers.V1
             if (entries == null)
                 throw new RecordNotFoundException("Unable to find entry records.");
 
-            var entriesResponse = _mapper.Map<List<Entry>, IEnumerable<EntryResponse>>(entries);
+            var entriesResponse = _mapper.Map<IEnumerable<Entry>>(entries);
             return Ok(entriesResponse);
         }
 

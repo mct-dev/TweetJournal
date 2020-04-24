@@ -20,7 +20,7 @@ namespace TweetJournal.Access.Entries
             return await _entryContext.Entries.SingleOrDefaultAsync(e => e.Id == id);
         }
         
-        public async Task<List<Entry>> GetAsync()
+        public async Task<IEnumerable<Entry>> GetAsync()
         {
             return await _entryContext.Entries.ToListAsync();
         }

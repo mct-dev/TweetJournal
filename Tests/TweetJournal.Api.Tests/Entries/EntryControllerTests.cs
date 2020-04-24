@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
@@ -7,6 +8,7 @@ using TweetJournal.Access.Entries;
 using TweetJournal.Access.Entries.Domain;
 using TweetJournal.Api.Contracts.V1.Responses;
 using TweetJournal.Api.Controllers.V1;
+using TweetJournal.Api.Exceptions;
 
 namespace TweetJournal.Api.Tests.Entries
 {
@@ -55,12 +57,56 @@ namespace TweetJournal.Api.Tests.Entries
                 .Setup(ea => ea.CreateAsync(contractEntry))
                 .ReturnsAsync(true);
 
-            var expected = entryResponse ;
             var actual = await _sut.Create(createEntryRequest);
             var result = (CreatedResult)actual;
             
             Assert.AreEqual(201, result.StatusCode);
             Assert.AreEqual(entryResponse, ((EntryResponse)result.Value));
+        }
+
+        [Test]
+        public async Task ShouldGetAllEntries()
+        {
+            var entryList = Mother.GetTestEntriesList();
+            var entryResponseList = Mother.GetTestEntryResponseList();
+            
+            _mapper
+                .Setup(m => m.Map<IEnumerable<EntryResponse>>(entryList))
+                .Returns(entryResponseList);
+            _entryAccess
+                .Setup(ea => ea.GetAsync())
+                .ReturnsAsync(entryList);
+
+            var actual = await _sut.GetAll();
+            Assert.AreEqual(actual, entryList);
+        }
+
+        [Test]
+        public void ShouldThrowNotFoundForNullGetEntriesData()
+        {
+            _entryAccess
+                .Setup(ea => ea.GetAsync())
+                .ReturnsAsync((IEnumerable<Entry>)null);
+
+            Assert.ThrowsAsync<RecordNotFoundException>(() => _sut.GetAll());
+        }
+        
+        [Test]
+        public async Task ShouldGetEntryById()
+        {
+            Assert.Pass();
+        }
+        
+        [Test]
+        public async Task ShouldUpdateEntry()
+        {
+            Assert.Pass();
+        }
+        
+        [Test]
+        public async Task ShouldDeleteEntry()
+        {
+            Assert.Pass();
         }
     }
 }

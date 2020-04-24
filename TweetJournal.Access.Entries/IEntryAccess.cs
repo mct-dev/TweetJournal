@@ -7,7 +7,7 @@ namespace TweetJournal.Access.Entries
 {
     public interface IEntryAccess
     {
-        Task<List<Entry>> GetAsync();
+        Task<IEnumerable<Entry>> GetAsync();
         Task<Entry> GetByIdAsync(Guid id);
         Task<bool> CreateAsync(Entry newEntry);
         Task<bool> UpdateAsync(Entry updatedEntry);
