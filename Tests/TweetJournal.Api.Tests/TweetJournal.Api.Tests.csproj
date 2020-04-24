@@ -17,4 +17,8 @@
       <ProjectReference Include="..\..\TweetJournal.Api\TweetJournal.Api.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Authentication" />
+    </ItemGroup>
+
 </Project>

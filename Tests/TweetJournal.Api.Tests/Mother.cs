@@ -3,23 +3,35 @@ using AutoMapper;
 using AutoMapper.Configuration;
 using TweetJournal.Access.Entries.Domain;
 using TweetJournal.Api.Contracts.V1.Requests;
+using TweetJournal.Api.Contracts.V1.Responses;
 using TweetJournal.Api.Mapping;
 
 namespace TweetJournal.Api.Tests
 {
     public static class Mother
     {
-        public static CreateEntryRequest TestCreateEntryRequest => new CreateEntryRequest
+        public static CreateEntryRequest CreateEntryRequest => new CreateEntryRequest
         {
-            Content = "Testing entry content."
+            Content = TestContent
         };
         public static Entry ContractEntry => new Entry
         {
-            Content = "Testing entry content.",
-            Id = Guid.NewGuid(),
-            CreatedDate = DateTime.Now,
-            ModifiedDate = DateTime.Now
+            Content = TestContent,
+            Id = TestEntryId,
+            CreatedDate = TestDateTimeNow,
+            ModifiedDate = TestDateTimeNow
         };
+        public static EntryResponse EntryResponse => new EntryResponse
+        {
+            Content = TestContent,
+            Id = TestEntryId,
+            CreatedDate = TestDateTimeNow,
+            ModifiedDate = TestDateTimeNow
+        };
+        
+        private static string TestContent = "Testing entry content.";
+        private static DateTime TestDateTimeNow = DateTime.Now;
+        private static Guid TestEntryId = Guid.NewGuid();
         
         public static IMapper ConfigureAutoMapper()
         {

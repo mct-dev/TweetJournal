@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 
 namespace TweetJournal.Api.Contracts.V1.Responses
 {
+    [ExcludeFromCodeCoverage]
     public class EntryResponse
     {
         public Guid Id { get; set; }

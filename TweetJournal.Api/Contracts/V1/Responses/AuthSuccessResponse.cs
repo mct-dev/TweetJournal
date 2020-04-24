@@ -1,5 +1,8 @@
-﻿namespace TweetJournal.Api.Contracts.V1.Responses
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace TweetJournal.Api.Contracts.V1.Responses
 {
+    [ExcludeFromCodeCoverage]
     public class AuthSuccessResponse
     {
         public string Token { get; set; }

@@ -1,5 +1,8 @@
-﻿namespace TweetJournal.Api.Contracts.V1
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace TweetJournal.Api.Contracts.V1
 {
+    [ExcludeFromCodeCoverage]
     public static class ApiRoutes
     {
         private const string Root = "api";
