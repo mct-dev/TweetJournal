@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
@@ -78,7 +79,9 @@ namespace TweetJournal.Api.Tests.Entries
                 .ReturnsAsync(entryList);
 
             var actual = await _sut.GetAll();
-            Assert.AreEqual(actual, entryList);
+            var result = (OkObjectResult)actual;
+            
+            Assert.AreEqual(result.Value, entryResponseList);
         }
 
         [Test]
