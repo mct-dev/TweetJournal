@@ -32,7 +32,7 @@ namespace TweetJournal.Api.Tests
 
         private const string TestContent = "Testing entry content.";
         private static readonly DateTime TestDateTimeNow = DateTime.Now;
-        private static readonly Guid TestEntryId = Guid.NewGuid();
+        public static readonly Guid TestEntryId = Guid.NewGuid();
 
         public static IEnumerable<Entry> GetTestEntriesList()
         {

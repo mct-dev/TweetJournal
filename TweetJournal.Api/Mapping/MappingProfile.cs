@@ -15,8 +15,9 @@ namespace TweetJournal.Api.Mapping
                 .ForMember(dest => dest.Id, opts => opts.MapFrom(src => Guid.NewGuid()))
                 .ForMember(dest => dest.CreatedDate, opts => opts.MapFrom(src => DateTime.Now))
                 .ForMember(dest => dest.ModifiedDate, opts => opts.MapFrom(src => DateTime.Now));
-            
             CreateMap<Entry, EntryResponse>();
+            CreateMap<UpdateEntryRequest, Entry>()
+                .ForMember(dest => dest.ModifiedDate, opts => opts.MapFrom(src => DateTime.Now));
         }
     }
 }

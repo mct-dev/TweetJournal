@@ -58,28 +58,18 @@ namespace TweetJournal.Api.Controllers.V1
         [HttpPut(ApiRoutes.Entry.Update)]
         [SwaggerResponse(404)]
         [SwaggerResponse(200)]
-        public async Task<ActionResult> Update([FromRoute] Guid entryId, [FromBody] UpdateEntryRequest entryRequest)
+        public async Task<ActionResult> Update([FromRoute] Guid entryId, [FromBody] UpdateEntryRequest updateEntryRequest)
         {
-            var updatedEntry = new Entry
-            {
-                Id = entryId,
-                Content = entryRequest.Content,
-                ModifiedDate = DateTime.Now
-            };
+            var entryWithUpdates = _mapper.Map<Entry>(updateEntryRequest);
 
-            var successful = await _entryAccess.UpdateAsync(updatedEntry);
+            var successful = await _entryAccess.UpdateAsync(entryWithUpdates);
             if (!successful)
             {
                 return NotFound();
             }
 
-            var entryResponse = new EntryResponse
-            {
-                Id = updatedEntry.Id,
-                Content = updatedEntry.Content,
-                CreatedDate = updatedEntry.CreatedDate,
-                ModifiedDate = updatedEntry.ModifiedDate
-            };
+            var updatedEntry = await _entryAccess.GetByIdAsync(entryId);
+             var entryResponse = _mapper.Map<EntryResponse>(updatedEntry);
             return Ok(entryResponse);
         }
 
