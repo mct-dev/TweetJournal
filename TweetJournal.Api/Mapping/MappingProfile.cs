@@ -1,6 +1,5 @@
 ﻿using System;
 using AutoMapper;
-using Microsoft.AspNetCore.Mvc;
 using TweetJournal.Access.Entries.Domain;
 using TweetJournal.Api.Contracts.V1.Requests;
 using TweetJournal.Api.Contracts.V1.Responses;
