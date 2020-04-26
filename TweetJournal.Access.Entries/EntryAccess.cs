@@ -32,6 +32,7 @@ namespace TweetJournal.Access.Entries
             return numberOfUpdates > 0;
         }
 
+        // should replace with Patch
         public async Task<bool> UpdateAsync(Entry updatedEntry)
         {
             _entryContext.Entries.Update(updatedEntry);

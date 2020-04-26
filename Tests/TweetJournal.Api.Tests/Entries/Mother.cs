@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using AutoMapper;
-using AutoMapper.Configuration;
 using TweetJournal.Access.Entries.Domain;
 using TweetJournal.Api.Contracts.V1.Requests;
 using TweetJournal.Api.Contracts.V1.Responses;
-using TweetJournal.Api.Mapping;
 
-namespace TweetJournal.Api.Tests
+namespace TweetJournal.Api.Tests.Entries
 {
     public static class Mother
     {
@@ -74,22 +71,6 @@ namespace TweetJournal.Api.Tests
                     ModifiedDate = DateTime.Now.Subtract(TimeSpan.FromDays(1))
                 }
             };
-        }
-        
-        public static IMapper ConfigureAutoMapper()
-        {
-            var cfg = new MapperConfigurationExpression();
-            cfg.AddProfile<MappingProfile>();
-            
-            var mapperConfig = new MapperConfiguration(cfg);
-            IMapper mapper = new Mapper(mapperConfig);
-            
-            return mapper;
-        }
-
-        public static MapperConfiguration GetAutoMapperConfiguration()
-        {
-            return AutoMapperConfiguration.ConfigureMapper();
         }
     }
 }
