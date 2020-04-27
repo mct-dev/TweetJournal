@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using TweetJournal.Access.Entries.Domain;
 
 namespace TweetJournal.Access.Entries
 {
+    [ExcludeFromCodeCoverage]
     public class EntryAccess : IEntryAccess
     {
         private readonly EntryContext _entryContext;

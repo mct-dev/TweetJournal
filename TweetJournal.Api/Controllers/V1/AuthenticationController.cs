@@ -24,10 +24,10 @@ namespace TweetJournal.Api.Controllers.V1
                 await _authenticationAccess.RegisterAsync(userRequest.EmailAddress, userRequest.Password);
             if (authResponse.Success)
                 return Ok(authResponse);
-            
-            return BadRequest(new
+
+            return new BadRequestObjectResult(new AuthFailedResponse
             {
-                authResponse.Errors
+                Errors = authResponse.Errors
             });
         }
 

@@ -146,7 +146,7 @@ namespace TweetJournal.Api.Tests.Entries
                 .Setup(ea => ea.GetByIdAsync(entryId))
                 .ReturnsAsync(updatedEntry);
 
-            var actual = await _sut.Update(entryId, updateEntryRequest);
+            var actual = await _sut.Patch(entryId, updateEntryRequest);
             var result = (OkObjectResult) actual;
             
             Assert.AreEqual(entryResponse.Content, ((EntryResponse)result.Value).Content);

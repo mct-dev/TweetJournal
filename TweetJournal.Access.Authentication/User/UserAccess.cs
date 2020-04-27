@@ -1,8 +1,10 @@
-﻿using System.Threading.Tasks;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 
 namespace TweetJournal.Access.Authentication.User
 {
+    [ExcludeFromCodeCoverage]
     public class UserAccess : IUserAccess
     {
         private readonly UserManager<IdentityUser> _userManager;

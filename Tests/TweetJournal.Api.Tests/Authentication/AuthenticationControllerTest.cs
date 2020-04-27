@@ -6,7 +6,7 @@ using Moq;
 using NUnit.Framework;
 using TweetJournal.Access.Authentication;
 using TweetJournal.Access.Authentication.Contract;
-using TweetJournal.Api.Contracts.V1.Requests;
+using TweetJournal.Api.Contracts.V1.Responses;
 using TweetJournal.Api.Controllers.V1;
 
 namespace TweetJournal.Api.Tests.Authentication
@@ -29,12 +29,7 @@ namespace TweetJournal.Api.Tests.Authentication
         [Test]
         public async Task ShouldReturnOkForSuccessfulRegister()
         {
-            var userRegistrationRequest = new UserRegistrationRequest
-            {
-                EmailAddress = $"{Guid.NewGuid()}testemail@testingdomain.com",
-                Password = $"{Guid.NewGuid()}password",
-                PhoneNumber = 8052422424
-            };
+            var userRegistrationRequest = Mother.UserRegistrationRequest;
             var successfulAuthResult = new AuthenticationResult
             {
                 Success = true
@@ -53,30 +48,38 @@ namespace TweetJournal.Api.Tests.Authentication
         [Test]
         public async Task ShouldReturnBadResponseWithErrorsForFailedRegister()
         {
-            var userRegistrationRequest = new UserRegistrationRequest
+            var userRegistrationRequest = Mother.UserRegistrationRequest;
+            var failedAuthResult = Mother.FailedAuthenticationResult;
+            var authFailedResponse = new AuthFailedResponse
             {
-                EmailAddress = $"{Guid.NewGuid()}testemail@testingdomain.com",
-                Password = $"{Guid.NewGuid()}password",
-                PhoneNumber = 8052422424
-            };
-            var failedAuthResult = new AuthenticationResult
-            {
-                Success = false,
-                Errors = new string[]
-                {
-                    "Test error 1.",
-                    "Test error 2."
-                }
+                Errors = failedAuthResult.Errors
             };
 
             _authenticationAccess
                 .Setup(aa => aa.RegisterAsync(userRegistrationRequest.EmailAddress, userRegistrationRequest.Password))
                 .ReturnsAsync(failedAuthResult);
             
-            var authFailedResponse = await _sut.Register(userRegistrationRequest);
-            var actual = (BadRequestObjectResult) authFailedResponse;
+            var actionResult = await _sut.Register(userRegistrationRequest);
+            var actual = (BadRequestObjectResult) actionResult;
             
-            Assert.AreEqual(failedAuthResult.Errors, ((object)actual.Value)["Errors"]);
+            Assert.AreEqual(authFailedResponse.Errors, ((AuthFailedResponse)actual.Value).Errors);
+        }
+
+        [Test]
+        public async Task ShouldReturnOkWithTokenForSuccessfulLogin()
+        {
+            var loginRequest = Mother.LoginRequest;
+            var testToken = Mother.TestJwt;
+            var authResult = Mother.SuccessfulAuthResult;
+
+            _authenticationAccess
+                .Setup(aa => aa.LoginAsync(loginRequest.Username, loginRequest.Password))
+                .ReturnsAsync(authResult);
+
+            var actionResult = await _sut.Login(loginRequest);
+            var actual = (OkObjectResult)actionResult;
+            
+            Assert.AreEqual(testToken, ((AuthSuccessResponse)actual.Value).Token);
         }
     }
 }

@@ -1,15 +1,19 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using AutoMapper;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
 using TweetJournal.Access.Entries;
 
 namespace TweetJournal.Api.StartupConfiguration
 {
-    [ExcludeFromCodeCoverage]
+    [ExcludeFromCodeCoverage ]
     internal static class ServiceInjection
     {
         public static void InjectDevelopmentServices(IServiceCollection services, IConfiguration configuration)
@@ -36,9 +40,28 @@ namespace TweetJournal.Api.StartupConfiguration
 
         private static void InstallMvc(IServiceCollection services)
         {
-            services.AddControllersWithViews();
+            services.AddControllersWithViews(options =>
+            {
+                options.InputFormatters.Insert(0, GetJsonPatchInputFormatter());
+            });
             services.AddMvcCore()
                 .AddApiExplorer();
+        }
+
+        private static NewtonsoftJsonPatchInputFormatter GetJsonPatchInputFormatter()
+        {
+            var builder = new ServiceCollection()
+                .AddLogging()
+                .AddMvc()
+                .AddNewtonsoftJson()
+                .Services.BuildServiceProvider();
+
+            return builder
+                .GetRequiredService<IOptions<MvcOptions>>()
+                .Value
+                .InputFormatters
+                .OfType<NewtonsoftJsonPatchInputFormatter>()
+                .First();
         }
         
         private static void InstallSwagger(IServiceCollection services)

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 using TweetJournal.Access.Authentication.Contract;
 using TweetJournal.Access.Authentication.Jwt;
@@ -7,6 +8,7 @@ using TweetJournal.Access.Authentication.User;
 
 namespace TweetJournal.Access.Authentication
 {
+    [ExcludeFromCodeCoverage]
     public class AuthenticationAccess : IAuthenticationAccess
     {
         private readonly IJwtAccess _jwtAccess;

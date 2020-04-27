@@ -58,7 +58,7 @@ namespace TweetJournal.Api.Controllers.V1
         [HttpPut(ApiRoutes.Entry.Update)]
         [SwaggerResponse(404)]
         [SwaggerResponse(200)]
-        public async Task<ActionResult> Update([FromRoute] Guid entryId, [FromBody] UpdateEntryRequest updateEntryRequest)
+        public async Task<ActionResult> Patch([FromRoute] Guid entryId, [FromBody] UpdateEntryRequest updateEntryRequest)
         {
             var entryWithUpdates = _mapper.Map<Entry>(updateEntryRequest);
 

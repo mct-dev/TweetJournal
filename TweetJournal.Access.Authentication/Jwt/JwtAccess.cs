@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -7,6 +8,7 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace TweetJournal.Access.Authentication.Jwt
 {
+    [ExcludeFromCodeCoverage]
     public class JwtAccess : IJwtAccess
     {
         private readonly IConfiguration _configuration;

@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
@@ -9,6 +10,7 @@ using TweetJournal.Access.Authentication.User;
 
 namespace TweetJournal.Access.Authentication
 {
+    [ExcludeFromCodeCoverage]
     public static class ServiceInjection
     {
         public static void ConfigureServices(IServiceCollection services, IConfiguration configuration)
