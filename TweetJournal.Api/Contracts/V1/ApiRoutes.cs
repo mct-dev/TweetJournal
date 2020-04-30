@@ -14,7 +14,7 @@ namespace TweetJournal.Api.Contracts.V1
             public const string GetAll = Base + "/entry";
             public const string Create = Base + "/entry";
             public const string GetOne = Base + "/entry/{entryId}";
-            public const string Update = Base + "/entry/{entryId}";
+            public const string Patch = Base + "/entry/{entryId}";
             public const string Delete = Base + "/entry/{entryId}";
         }
 

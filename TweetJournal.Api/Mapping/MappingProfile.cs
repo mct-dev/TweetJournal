@@ -3,6 +3,7 @@ using AutoMapper;
 using TweetJournal.Access.Entries.Domain;
 using TweetJournal.Api.Contracts.V1.Requests;
 using TweetJournal.Api.Contracts.V1.Responses;
+using TweetJournal.Api.Domain;
 
 namespace TweetJournal.Api.Mapping
 {
@@ -15,8 +16,10 @@ namespace TweetJournal.Api.Mapping
                 .ForMember(dest => dest.CreatedDate, opts => opts.MapFrom(src => DateTime.Now))
                 .ForMember(dest => dest.ModifiedDate, opts => opts.MapFrom(src => DateTime.Now));
             CreateMap<Entry, EntryResponse>();
-            CreateMap<UpdateEntryRequest, Entry>()
+            CreateMap<Entry, HydratedUpdateEntryRequest>()
                 .ForMember(dest => dest.ModifiedDate, opts => opts.MapFrom(src => DateTime.Now));
+            CreateMap<HydratedUpdateEntryRequest, Entry>()
+                .ForMember(dest => dest.CreatedDate, opts => opts.Ignore());
         }
     }
 }

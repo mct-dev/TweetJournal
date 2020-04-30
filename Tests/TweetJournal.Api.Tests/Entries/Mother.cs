@@ -3,28 +3,54 @@ using System.Collections.Generic;
 using TweetJournal.Access.Entries.Domain;
 using TweetJournal.Api.Contracts.V1.Requests;
 using TweetJournal.Api.Contracts.V1.Responses;
+using TweetJournal.Api.Domain;
 
 namespace TweetJournal.Api.Tests.Entries
 {
     public static class Mother
     {
-        public static CreateEntryRequest CreateEntryRequest => new CreateEntryRequest
+        public static CreateEntryRequest GenericCreateEntryRequest => new CreateEntryRequest
         {
             Content = TestContent
         };
-        public static Entry ContractEntry => new Entry
+        public static Entry GenericEntry => new Entry
         {
             Content = TestContent,
             Id = TestEntryId,
             CreatedDate = TestDateTimeNow,
             ModifiedDate = TestDateTimeNow
         };
-        public static EntryResponse EntryResponse => new EntryResponse
+        public static EntryResponse GenericEntryResponse => new EntryResponse
         {
             Content = TestContent,
             Id = TestEntryId,
             CreatedDate = TestDateTimeNow,
             ModifiedDate = TestDateTimeNow
+        };
+
+        public static UpdateEntryRequest UpdateEntryRequest => new UpdateEntryRequest
+        {
+            Content = "Updated entry!"
+        };
+        public static HydratedUpdateEntryRequest HydratedUpdateEntryRequest => new HydratedUpdateEntryRequest
+        {
+            Id = GenericEntry.Id,
+            Content = GenericEntry.Content,
+            ModifiedDate = DateTime.Now
+        };
+        public static Entry UpdatedEntry => new Entry
+        {
+            Id = GenericEntry.Id,
+            Content = UpdateEntryRequest.Content,
+            ModifiedDate = HydratedUpdateEntryRequest.ModifiedDate,
+            CreatedDate = GenericEntry.CreatedDate
+        };
+        public static EntryResponse UpdatedEntryResponse => new EntryResponse
+        {
+            Id = GenericEntry.Id,
+            Content = UpdatedEntry.Content,
+            ModifiedDate = UpdatedEntry.ModifiedDate,
+            CreatedDate = UpdatedEntry.CreatedDate
         };
 
         private const string TestContent = "Testing entry content.";

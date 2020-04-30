@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 using TweetJournal.Access.Entries;
@@ -11,6 +12,7 @@ using TweetJournal.Access.Entries.Domain;
 using TweetJournal.Api.Contracts.V1;
 using TweetJournal.Api.Contracts.V1.Requests;
 using TweetJournal.Api.Contracts.V1.Responses;
+using TweetJournal.Api.Domain;
 using TweetJournal.Api.Exceptions;
 
 namespace TweetJournal.Api.Controllers.V1
@@ -54,23 +56,28 @@ namespace TweetJournal.Api.Controllers.V1
             var entryResponse = _mapper.Map<EntryResponse>(entry);
             return Ok(entryResponse);
         }
+        
 
-        [HttpPut(ApiRoutes.Entry.Update)]
+        [HttpPatch(ApiRoutes.Entry.Patch)]
         [SwaggerResponse(404)]
         [SwaggerResponse(200)]
-        public async Task<ActionResult> Patch([FromRoute] Guid entryId, [FromBody] UpdateEntryRequest updateEntryRequest)
+        public async Task<ActionResult> Patch([FromRoute] Guid entryId, [FromBody] JsonPatchDocument<UpdateEntryRequest> updateEntryRequest)
         {
-            var entryWithUpdates = _mapper.Map<Entry>(updateEntryRequest);
-
-            var successful = await _entryAccess.UpdateAsync(entryWithUpdates);
-            if (!successful)
+            var existingEntry = await _entryAccess.GetByIdAsync(entryId);
+            if (existingEntry == null)
             {
-                return NotFound();
+                throw new RecordNotFoundException($"Unable to find entry with id: {entryId}.");
             }
+            
+            var patchedEntry = _mapper.Map<HydratedUpdateEntryRequest>(existingEntry);
+            updateEntryRequest.ApplyTo(patchedEntry);
+            
+            var entryWithUpdates = _mapper.Map<Entry>(patchedEntry);
+            await _entryAccess.UpdateAsync(entryWithUpdates);
 
-            var updatedEntry = await _entryAccess.GetByIdAsync(entryId);
-             var entryResponse = _mapper.Map<EntryResponse>(updatedEntry);
-            return Ok(entryResponse);
+            var updatedEntryResponse = _mapper.Map<EntryResponse>(entryWithUpdates);
+
+            return Ok(updatedEntryResponse);
         }
 
         [HttpDelete(ApiRoutes.Entry.Delete)]

@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 using NUnit.Framework;
@@ -9,6 +11,7 @@ using TweetJournal.Access.Entries.Domain;
 using TweetJournal.Api.Contracts.V1.Requests;
 using TweetJournal.Api.Contracts.V1.Responses;
 using TweetJournal.Api.Controllers.V1;
+using TweetJournal.Api.Domain;
 using TweetJournal.Api.Exceptions;
 
 namespace TweetJournal.Api.Tests.Entries
@@ -44,9 +47,9 @@ namespace TweetJournal.Api.Tests.Entries
         [Test]
         public async Task ShouldCreateAnEntry()
         {
-            var createEntryRequest = Mother.CreateEntryRequest;
-            var contractEntry = Mother.ContractEntry;
-            var entryResponse = Mother.EntryResponse;
+            var createEntryRequest = Mother.GenericCreateEntryRequest;
+            var contractEntry = Mother.GenericEntry;
+            var entryResponse = Mother.GenericEntryResponse;
             
             _mapper
                 .Setup(m => m.Map<Entry>(createEntryRequest))
@@ -97,8 +100,8 @@ namespace TweetJournal.Api.Tests.Entries
         [Test]
         public async Task ShouldGetEntryById()
         {
-            var entry = Mother.ContractEntry;
-            var entryResponse = Mother.EntryResponse;
+            var entry = Mother.GenericEntry;
+            var entryResponse = Mother.GenericEntryResponse;
             var entryId = Mother.TestEntryId;
             
             _mapper
@@ -115,41 +118,39 @@ namespace TweetJournal.Api.Tests.Entries
         }
         
         [Test]
-        public async Task ShouldUpdateEntry()
+        public async Task ShouldPatchEntry()
         {
-            var entryId = Mother.TestEntryId;
-            var updateEntryRequest = new UpdateEntryRequest
-            {
-                Content = "Updated entry!"
-            };
-            var updatedEntry = new Entry
-            {
-                Id = entryId,
-                Content = updateEntryRequest.Content,
-            };
-            var entryResponse = new EntryResponse
-            {
-                Id = entryId,
-                Content = updateEntryRequest.Content
-            };
+            var initialEntry = Mother.GenericEntry;
+
+            var updateEntryRequest = Mother.UpdateEntryRequest;
+            var hydratedEntryRequest = Mother.HydratedUpdateEntryRequest;
+            var updatedEntry = Mother.UpdatedEntry;
+            var updatedEntryResponse = Mother.UpdatedEntryResponse;
+            var patchDocument = new JsonPatchDocument<UpdateEntryRequest>();
+            
+            patchDocument.Add(e => e.Content, updatedEntry.Content);
 
             _mapper
-                .Setup(m => m.Map<Entry>(updateEntryRequest))
+                .Setup(m => m.Map<HydratedUpdateEntryRequest>(initialEntry))
+                .Returns(hydratedEntryRequest);
+            _mapper
+                .Setup(m => m.Map<Entry>(hydratedEntryRequest))
                 .Returns(updatedEntry);
             _mapper
                 .Setup(m => m.Map<EntryResponse>(updatedEntry))
-                .Returns(entryResponse);
+                .Returns(updatedEntryResponse);
+
+            _entryAccess
+                .Setup(ea => ea.GetByIdAsync(initialEntry.Id))
+                .ReturnsAsync(initialEntry);
             _entryAccess
                 .Setup(ea => ea.UpdateAsync(updatedEntry))
                 .ReturnsAsync(true);
-            _entryAccess
-                .Setup(ea => ea.GetByIdAsync(entryId))
-                .ReturnsAsync(updatedEntry);
 
-            var actual = await _sut.Patch(entryId, updateEntryRequest);
+            var actual = await _sut.Patch(initialEntry.Id, patchDocument);
             var result = (OkObjectResult) actual;
             
-            Assert.AreEqual(entryResponse.Content, ((EntryResponse)result.Value).Content);
+            Assert.AreEqual(updateEntryRequest.Content, ((EntryResponse)result.Value).Content);
         }
         
         [Test]
