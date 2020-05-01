@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using TweetJournal.Api.Options;
 
 namespace TweetJournal.Api.StartupConfiguration
@@ -10,15 +11,23 @@ namespace TweetJournal.Api.StartupConfiguration
     [ExcludeFromCodeCoverage]
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        private IConfiguration Configuration { get; }
+        private IWebHostEnvironment _environment { get; set; }
+
+        public Startup(IConfiguration configuration, IWebHostEnvironment environment)
         {
             Configuration = configuration;
+            _environment = environment;
         }
-
-        public IConfiguration Configuration { get; }
 
         public void ConfigureServices(IServiceCollection services)
         {
+            if (_environment.IsDevelopment())
+            {
+                ServiceInjection.InjectDevelopmentServices(services, Configuration);
+                return;
+            }
+            
             ServiceInjection.InjectProductionServices(services, Configuration);
         }
 
@@ -30,6 +39,7 @@ namespace TweetJournal.Api.StartupConfiguration
             app.UseAuthentication();
             app.UseHttpsRedirection();
             app.UseRouting();
+            app.UseCors();
             app.UseAuthorization();
             app.UseEndpoints(endpoints =>
             {

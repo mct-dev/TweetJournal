@@ -19,10 +19,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="ClientApps" />
-    </ItemGroup>
-
-    <ItemGroup>
       <None Include="wwwroot\js\Home\HomeApp.js" />
       <None Include="wwwroot\js\web_modules\htm.js" />
       <None Include="wwwroot\js\web_modules\preact.js" />

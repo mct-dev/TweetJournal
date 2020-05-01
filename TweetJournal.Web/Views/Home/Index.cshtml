@@ -2,13 +2,14 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-    <div id="app"></div>
+<div data-controller="entryinput">
+    <input data-target="entryinput.input" data-action="change->entryinput#update" type="text" />
+    <div data-target="entryinput.output"></div>
 </div>
+
 
 @section Scripts
 {
-    <script type="module" src="js/Home/HomeApp.js"></script>
+    <script src="js/lib/turbolinks-5.2.0.js" defer></script>
+    <script type="module" src="js/InitStimulus.js"></script>
 }

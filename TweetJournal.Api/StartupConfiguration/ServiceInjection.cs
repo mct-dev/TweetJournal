@@ -28,7 +28,7 @@ namespace TweetJournal.Api.StartupConfiguration
 
         private static void InjectServices(IServiceCollection services, IConfiguration configuration, bool isDevelopment)
         {
-
+            InstallCors(services, isDevelopment);
             InstallMvc(services);
             InstallSwagger(services);
             InstallEntryContextAndIdentity(services);
@@ -38,6 +38,40 @@ namespace TweetJournal.Api.StartupConfiguration
             Access.Entries.ServiceInjection.ConfigureServices(services, configuration);
         }
 
+        private static void InstallCors(IServiceCollection services, bool isDevelopment)
+        {
+            if (isDevelopment)
+            {
+                AllowDevelopmentOrigins(services);
+                return;
+            }
+            
+            AllowProductionOrigins(services);
+        }
+        
+        private static void AllowDevelopmentOrigins(IServiceCollection services)
+        {
+            services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(builder =>
+                {
+                    builder.WithOrigins("*");
+                });
+            });
+        }
+        
+        private static void AllowProductionOrigins(IServiceCollection services)
+        {
+            // TODO: specify allowed origins for production
+            services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(builder =>
+                {
+                    builder.WithOrigins("*");
+                });
+            });
+        }
+        
         private static void InstallMvc(IServiceCollection services)
         {
             services.AddControllersWithViews(options =>
