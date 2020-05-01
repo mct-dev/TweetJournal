@@ -1,0 +1,20 @@
+{
+  "name": "tweetjournal.web.clientapps",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Mike Tobias",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "build": "snowpack"
+  },
+  "devDependencies": {
+    "eslint": "^6.8.0",
+    "eslint-config-google": "^0.14.0",
+    "snowpack": "^1.7.1"
+  },
+  "dependencies": {
+    "htm": "^3.0.4",
+    "preact": "^10.4.1"
+  }
+}

@@ -1,9 +1,10 @@
 ﻿using System.Diagnostics;
+using System.Threading;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using TweetJournalWeb.Models;
+using TweetJournal.Web.Models;
 
-namespace TweetJournalWeb.Controllers
+namespace TweetJournal.Web.Controllers
 {
     public class HomeController : Controller
     {
@@ -21,13 +22,14 @@ namespace TweetJournalWeb.Controllers
 
         public IActionResult Privacy()
         {
+            Thread.Sleep(5000);
             return View();
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return View(new ErrorViewModel {RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier});
         }
     }
 }
