@@ -32,8 +32,8 @@ steps:
   displayName: 'Test'
   inputs:
     command: 'test'
-    projects: '**/*.sln'
-    arguments: '-c $(buildConfiguration) --no-restore --no-build'
+    projects: '$(solution)'
+    arguments: '-c $(buildConfiguration)'
 
 - task: PublishPipelineArtifact@1
   displayName: 'Publish Artifact'
