@@ -18,7 +18,7 @@ namespace TweetJournal.Api.Controllers.V1
         }
 
         [HttpPost(ApiRoutes.Authentication.Register)]
-        public async Task<IActionResult> Register([FromBody] UserRegistrationRequest userRequest)
+        public async Task<IActionResult> Register(UserRegistrationRequest userRequest)
         {
             var authResponse =
                 await _authenticationAccess.RegisterAsync(userRequest.EmailAddress, userRequest.Password);
@@ -32,7 +32,7 @@ namespace TweetJournal.Api.Controllers.V1
         }
 
         [HttpPost(ApiRoutes.Authentication.Login)]
-        public async Task<IActionResult> Login([FromBody] LoginRequest loginRequest)
+        public async Task<IActionResult> Login(LoginRequest loginRequest)
         {
             var authResponse = await _authenticationAccess.LoginAsync(loginRequest.Username, loginRequest.Password);
             if (authResponse.Success)

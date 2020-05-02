@@ -13,27 +13,28 @@ using TweetJournal.Access.Entries;
 
 namespace TweetJournal.Api.StartupConfiguration
 {
-    [ExcludeFromCodeCoverage ]
+    [ExcludeFromCodeCoverage]
     internal static class ServiceInjection
     {
         public static void InjectDevelopmentServices(IServiceCollection services, IConfiguration configuration)
         {
             InjectServices(services, configuration, true);
         }
-        
+
         public static void InjectProductionServices(IServiceCollection services, IConfiguration configuration)
         {
             InjectServices(services, configuration, false);
         }
 
-        private static void InjectServices(IServiceCollection services, IConfiguration configuration, bool isDevelopment)
+        private static void InjectServices(IServiceCollection services, IConfiguration configuration,
+            bool isDevelopment)
         {
             InstallCors(services, isDevelopment);
             InstallMvc(services);
             InstallSwagger(services);
             InstallEntryContextAndIdentity(services);
             InstallAutoMapper(services, configuration);
-            
+
             Access.Authentication.ServiceInjection.ConfigureServices(services, configuration);
             Access.Entries.ServiceInjection.ConfigureServices(services, configuration);
         }
@@ -48,18 +49,20 @@ namespace TweetJournal.Api.StartupConfiguration
             
             AllowProductionOrigins(services);
         }
-        
+
         private static void AllowDevelopmentOrigins(IServiceCollection services)
         {
             services.AddCors(options =>
             {
                 options.AddDefaultPolicy(builder =>
                 {
-                    builder.WithOrigins("*");
+                    builder.AllowAnyHeader()
+                        .AllowAnyOrigin()
+                        .AllowAnyMethod();
                 });
             });
         }
-        
+
         private static void AllowProductionOrigins(IServiceCollection services)
         {
             // TODO: specify allowed origins for production
@@ -67,19 +70,19 @@ namespace TweetJournal.Api.StartupConfiguration
             {
                 options.AddDefaultPolicy(builder =>
                 {
-                    builder.WithOrigins("*");
+                    builder.AllowAnyHeader()
+                        .AllowAnyOrigin()
+                        .AllowAnyMethod();
                 });
             });
         }
-        
+
         private static void InstallMvc(IServiceCollection services)
         {
             services.AddControllersWithViews(options =>
             {
                 options.InputFormatters.Insert(0, GetJsonPatchInputFormatter());
             });
-            services.AddMvcCore()
-                .AddApiExplorer();
         }
 
         private static NewtonsoftJsonPatchInputFormatter GetJsonPatchInputFormatter()
@@ -97,12 +100,12 @@ namespace TweetJournal.Api.StartupConfiguration
                 .OfType<NewtonsoftJsonPatchInputFormatter>()
                 .First();
         }
-        
+
         private static void InstallSwagger(IServiceCollection services)
         {
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "BCI SelfServe API", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo {Title = "BCI SelfServe API", Version = "v1"});
                 c.EnableAnnotations();
                 c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
                 {
@@ -113,11 +116,17 @@ namespace TweetJournal.Api.StartupConfiguration
                 });
                 c.AddSecurityRequirement(new OpenApiSecurityRequirement
                 {
-                    { new OpenApiSecurityScheme{Reference = new OpenApiReference
                     {
-                        Id = "Bearer",
-                        Type = ReferenceType.SecurityScheme
-                    }}, new List<string>()}
+                        new OpenApiSecurityScheme
+                        {
+                            Reference = new OpenApiReference
+                            {
+                                Id = "Bearer",
+                                Type = ReferenceType.SecurityScheme
+                            }
+                        },
+                        new List<string>()
+                    }
                 });
             });
         }

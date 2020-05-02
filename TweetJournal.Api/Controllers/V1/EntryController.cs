@@ -96,7 +96,7 @@ namespace TweetJournal.Api.Controllers.V1
 
         [HttpPost(ApiRoutes.Entry.Create)]
         [SwaggerResponse(201, "Item was created.")]
-        public async Task<ActionResult> Create([FromBody] CreateEntryRequest createEntryRequest)
+        public async Task<ActionResult> Create(CreateEntryRequest createEntryRequest)
         {
             var entry = _mapper.Map<Entry>(createEntryRequest);
 

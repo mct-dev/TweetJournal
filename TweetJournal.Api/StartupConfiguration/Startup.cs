@@ -27,28 +27,21 @@ namespace TweetJournal.Api.StartupConfiguration
                 ServiceInjection.InjectDevelopmentServices(services, Configuration);
                 return;
             }
-            
+
             ServiceInjection.InjectProductionServices(services, Configuration);
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            app.UseExceptionHandler("/Home/Error");
             app.UseHsts();
+            
+            UseSwagger(app);
 
             app.UseAuthentication();
             app.UseHttpsRedirection();
             app.UseRouting();
             app.UseCors();
-            app.UseAuthorization();
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
-            });
-            
-            UseSwagger(app);
+            app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
         }
 
         private void UseSwagger(IApplicationBuilder app)
@@ -58,10 +51,7 @@ namespace TweetJournal.Api.StartupConfiguration
 
             app.UseSwagger();
             app.UseSwagger(option => { option.RouteTemplate = swaggerOptions.JsonRoute; });
-            app.UseSwaggerUI(c =>
-            {
-                c.SwaggerEndpoint(swaggerOptions.UIEndpoint, swaggerOptions.Description);
-            });
+            app.UseSwaggerUI(c => { c.SwaggerEndpoint(swaggerOptions.UIEndpoint, swaggerOptions.Description); });
         }
     }
 }

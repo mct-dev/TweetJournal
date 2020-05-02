@@ -15,7 +15,7 @@ module.exports = {
         'sourceType': 'module',
     },
     'rules': {
-        "indent": ["error", 2],
+        "indent": ["error", 4],
         "require-jsdoc": [1, {
             "require": {
                 "FunctionDeclaration": false,
