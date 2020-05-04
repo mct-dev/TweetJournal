@@ -1,7 +1,7 @@
 import {Application} from '/web_modules/stimulus.js';
-import EntryInputController from '/js/Entry/EntryInputController.js';
+import EntryInputController from './Controllers/EntryInputController.js';
 import AuthenticationController
-    from './Authentication/AuthenticationController.js';
+    from './Controllers/AuthenticationController.js';
 
 const application = Application.start();
 application.register('entryinput', EntryInputController);

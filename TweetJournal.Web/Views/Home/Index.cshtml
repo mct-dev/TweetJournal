@@ -9,7 +9,10 @@
 </div>
 
 <div data-controller="entryinput">
-    <input data-target="entryinput.input" data-action="change->entryinput#update" type="text" />
+    <input
+        data-target="entryinput.input"
+        data-action="change->entryinput#update keydown->entryinput#keydown keyup->entryinput#keyup"
+        type="text"/>
     <div data-target="entryinput.output"></div>
 </div>
 

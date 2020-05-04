@@ -11,7 +11,7 @@ module.exports = {
         'SharedArrayBuffer': 'readonly',
     },
     'parserOptions': {
-        'ecmaVersion': 11,
+        'ecmaVersion': 10,
         'sourceType': 'module',
     },
     'rules': {
@@ -24,6 +24,7 @@ module.exports = {
                 "ArrowFunctionExpression": false,
                 "FunctionExpression": false
             }
-        }]
+        }],
+        "max-len": ["error", 100]
     },
 };
