@@ -1,7 +1,7 @@
 const { compile } = require('./build.js')
 
 compile({
-  minify: false,
+  minify: true,
   sourcemap: true,
   define: {
     // double quotes required for esbuild

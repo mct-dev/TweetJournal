@@ -12,7 +12,10 @@ function compile (optionsOverrides) {
     ...optionsOverrides
   }
 
-  build(options).catch(() => process.exit(1))
+  build(options).catch((err) => {
+    console.log(err)
+    process.exit(1)
+  })
 }
 
 module.exports = { compile }
