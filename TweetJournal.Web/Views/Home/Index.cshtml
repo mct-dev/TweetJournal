@@ -1,7 +1,7 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
-
+<a href="/Home/Delayed">Delayed page</a>
 <div data-controller="authentication">
     <input data-target="authentication.username" type="text" />
     <input data-target="authentication.password" type="password" />
@@ -15,10 +15,10 @@
         type="text"/>
     <div data-target="entryinput.output"></div>
 </div>
+<div id="app"></div>
 
 
 @section Scripts
 {
-    <script src="js/lib/turbolinks-5.2.0.js" defer></script>
-    <script type="module" src="js/InitStimulus.js"></script>
+    <script src="~/public/app.js"></script>
 }

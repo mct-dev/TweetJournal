@@ -1,30 +1,28 @@
 module.exports = {
-    'env': {
-        'browser': true,
-        'es6': true,
+    "env": {
+        "browser": true,
+        "es6": true
     },
-    'extends': [
-        'google',
+    "extends": [
+        "plugin:react/recommended",
+        "standard"
     ],
-    'globals': {
-        'Atomics': 'readonly',
-        'SharedArrayBuffer': 'readonly',
+    "globals": {
+        "Atomics": "readonly",
+        "SharedArrayBuffer": "readonly"
     },
-    'parserOptions': {
-        'ecmaVersion': 10,
-        'sourceType': 'module',
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+        "ecmaFeatures": {
+            "jsx": true
+        },
+        "ecmaVersion": 2018,
+        "sourceType": "module"
     },
-    'rules': {
-        "indent": ["error", 4],
-        "require-jsdoc": [1, {
-            "require": {
-                "FunctionDeclaration": false,
-                "MethodDefinition": false,
-                "ClassDeclaration": true,
-                "ArrowFunctionExpression": false,
-                "FunctionExpression": false
-            }
-        }],
-        "max-len": ["error", 100]
-    },
+    "plugins": [
+        "react",
+        "@typescript-eslint"
+    ],
+    "rules": {
+    }
 };
