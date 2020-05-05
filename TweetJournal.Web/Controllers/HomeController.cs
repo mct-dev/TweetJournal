@@ -20,6 +20,12 @@ namespace TweetJournal.Web.Controllers
             return View();
         }
 
+        public IActionResult Delayed()
+        {
+            Thread.Sleep(3000);
+            return View();
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

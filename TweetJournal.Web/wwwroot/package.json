@@ -6,15 +6,26 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "build": "snowpack --include \"js/**/*.js\""
-  },
-  "dependencies": {
-    "stimulus": "^1.1.1",
-    "turbolinks": "^5.2.0"
+    "build": "node scripts/build/build-dev.js",
+    "lint": "eslint {app}/**/*.{js,jsx,ts,tsx}"
   },
   "devDependencies": {
+    "@types/react": "^16.9.34",
+    "@types/react-dom": "^16.9.7",
+    "@types/turbolinks": "^5.2.0",
+    "@typescript-eslint/eslint-plugin": "^2.31.0",
+    "@typescript-eslint/parser": "^2.31.0",
+    "esbuild": "^0.1.26",
     "eslint": "^6.8.0",
-    "eslint-config-google": "^0.14.0",
-    "snowpack": "^1.7.1"
+    "eslint-config-standard": "^14.1.1",
+    "eslint-plugin-import": "^2.20.2",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-react": "^7.19.0",
+    "eslint-plugin-standard": "^4.0.1",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "turbolinks": "^5.2.0",
+    "typescript": "^3.8.3"
   }
 }
