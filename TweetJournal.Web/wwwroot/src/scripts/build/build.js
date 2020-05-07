@@ -1,21 +1,16 @@
-const { build } = require('esbuild')
+const Bundler = require('parcel-bundler')
+const path = require('path')
 
-function compile (optionsOverrides) {
-  const options = {
-    stdio: 'inherit',
-    platform: 'browser',
-    entryPoints: ['./js/apps/JournalEntryApp.tsx'],
-    outfile: './js/dist/apps/JournalEntryApp.js',
-    minify: true,
-    bundle: true,
-    sourcemap: false,
-    ...optionsOverrides
-  }
-
-  build(options).catch((err) => {
-    console.log(err)
-    process.exit(1)
-  })
+const entryFiles = [path.join(__dirname, '../../js/apps/JournalEntryApp.tsx')]
+const options = {
+  outDir: './js/dist',
+  watch: process.env.NODE_ENV !== 'production',
+  target: 'browser'
 }
 
-module.exports = { compile }
+const build = async () => {
+  const bundler = new Bundler(entryFiles, options)
+  await bundler.bundle()
+}
+
+build()
