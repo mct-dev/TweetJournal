@@ -4,8 +4,8 @@ function compile (optionsOverrides) {
   const options = {
     stdio: 'inherit',
     platform: 'browser',
-    entryPoints: ['./app/app.tsx'],
-    outfile: './public/app.js',
+    entryPoints: ['./js/apps/JournalEntryApp.tsx'],
+    outfile: './js/dist/apps/JournalEntryApp.js',
     minify: true,
     bundle: true,
     sourcemap: false,

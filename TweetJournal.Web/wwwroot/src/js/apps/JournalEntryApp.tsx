@@ -6,7 +6,7 @@ Turbolinks.start()
 
 const App = () => {
   return (
-    <h2>hey buddy</h2>
+    <h2>hey bssssdsuddy</h2>
   )
 }
 
