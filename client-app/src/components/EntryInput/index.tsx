@@ -1,0 +1,25 @@
+import React from "react";
+import styled from "styled-components";
+
+import theme from "src/styles/theme";
+
+const Input = styled.input`
+  padding: 10px 20px;
+  border: none;
+  font-size: 30px;
+  color: ${theme.textColor};
+`;
+
+type Props = React.HTMLAttributes<HTMLInputElement>;
+
+export function EntryInput({ placeholder, onChange, ...rest }: Props) {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (onChange) {
+      onChange(e);
+    }
+    // eslint-disable-next-line no-console
+    console.log(e.target.value);
+  };
+
+  return <Input type="text" placeholder={placeholder} onChange={handleChange} {...rest} />;
+}
