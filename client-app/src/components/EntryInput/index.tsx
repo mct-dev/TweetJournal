@@ -8,6 +8,10 @@ const Input = styled.input`
   border: none;
   font-size: 30px;
   color: ${theme.textColor};
+
+  @media screen and (max-width: 550px) {
+    max-width: calc(100% - 40px);
+  }
 `;
 
 type Props = React.HTMLAttributes<HTMLInputElement>;
