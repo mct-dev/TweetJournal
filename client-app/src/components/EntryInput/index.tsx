@@ -21,8 +21,6 @@ export function EntryInput({ placeholder, onChange, ...rest }: Props) {
     if (onChange) {
       onChange(e);
     }
-    // eslint-disable-next-line no-console
-    console.log(e.target.value);
   };
 
   return <Input type="text" placeholder={placeholder} onChange={handleChange} {...rest} />;

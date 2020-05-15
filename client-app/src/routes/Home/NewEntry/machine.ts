@@ -52,6 +52,12 @@ export const entryMachine = Machine<NEContext, NEStateSchema, NEEvent>(
           onDone: {
             target: "idle",
           },
+          onError: {
+            target: "failure",
+            actions: assign({
+              errorMessage: (_, { data }) => data,
+            }),
+          },
         },
       },
       fetching: {

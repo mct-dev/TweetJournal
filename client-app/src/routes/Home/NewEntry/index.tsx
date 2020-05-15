@@ -17,12 +17,13 @@ const entries: Entry[] = [
 ];
 
 const mockFetchEntries = () => {
-  return Promise.resolve(entries);
+  return Promise.reject(new Error("problem occured while fetching entries!"));
 };
 
 const mockSubmitEntry = async (entry: Entry) => {
   await fetch("");
-  entries.push(entry);
+  return Promise.reject(new Error("problem occured while submitting entry!"));
+  // entries.push(entry);
 };
 
 const buildEntry = (content: string): Entry => ({
@@ -33,12 +34,20 @@ const buildEntry = (content: string): Entry => ({
 });
 
 export function NewEntry() {
-  const [state, send] = useMachine(entryMachine, {
+  const [state, send, service] = useMachine(entryMachine, {
     services: {
       fetchEntries: () => mockFetchEntries(),
       submitEntry: (context, _) => mockSubmitEntry(buildEntry(context.inputValue)),
     },
   });
+
+  useEffect(() => {
+    const subscription = service.subscribe((state) => {
+      console.log(state);
+    });
+
+    return subscription.unsubscribe;
+  }, [service]);
 
   useEffect(() => {
     send({ type: "FETCH" });
