@@ -24,7 +24,11 @@ const Container = styled.div`
 export const Default = () => {
   return (
     <Container>
-      <EntryInput placeholder={text("Placeholder", "Enter text here...")} onChange={action("onChange")} />
+      <EntryInput
+        placeholder={text("Placeholder", "Enter text here...")}
+        handleChange={action("handleChange")}
+        handleSubmit={action("handleSubmit")}
+      />
     </Container>
   );
 };

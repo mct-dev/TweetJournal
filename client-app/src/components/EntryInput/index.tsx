@@ -14,14 +14,35 @@ const Input = styled.input`
   }
 `;
 
-type Props = React.HTMLAttributes<HTMLInputElement>;
+interface Props extends React.HTMLAttributes<HTMLInputElement> {
+  handleSubmit: (val: string) => void;
+  handleChange: (val: string) => void;
+}
 
-export function EntryInput({ placeholder, onChange, ...rest }: Props) {
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (onChange) {
-      onChange(e);
+export function EntryInput({ placeholder, handleChange, handleSubmit, ...rest }: Props) {
+  const [value, setValue] = React.useState("");
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setValue(e.target.value);
+
+    if (handleChange) {
+      handleChange(e.target.value);
+    }
+  };
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      handleSubmit((e.target as HTMLInputElement).value);
+      setValue("");
     }
   };
 
-  return <Input type="text" placeholder={placeholder} onChange={handleChange} {...rest} />;
+  return (
+    <Input
+      type="text"
+      value={value}
+      placeholder={placeholder}
+      onChange={handleInputChange}
+      onKeyDown={handleKeyDown}
+      {...rest}
+    />
+  );
 }

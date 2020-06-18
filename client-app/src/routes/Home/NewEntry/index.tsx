@@ -17,13 +17,12 @@ const entries: Entry[] = [
 ];
 
 const mockFetchEntries = () => {
-  return Promise.reject(new Error("problem occured while fetching entries!"));
+  return Promise.resolve(entries);
 };
 
 const mockSubmitEntry = async (entry: Entry) => {
-  await fetch("");
-  return Promise.reject(new Error("problem occured while submitting entry!"));
-  // entries.push(entry);
+  entries.push(entry);
+  return Promise.resolve(entry);
 };
 
 const buildEntry = (content: string): Entry => ({
@@ -43,9 +42,10 @@ export function NewEntry() {
 
   useEffect(() => {
     const subscription = service.subscribe((state) => {
-      console.log(state);
+      console.log(state.context);
     });
 
+    // eslint-disable-next-line @typescript-eslint/unbound-method
     return subscription.unsubscribe;
   }, [service]);
 
@@ -53,13 +53,11 @@ export function NewEntry() {
     send({ type: "FETCH" });
   }, [send]);
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) =>
-    send({ type: "SET_INPUT_VALUE", payload: e.target.value });
+  const handleInputChange = (value: string) => send({ type: "SET_INPUT_VALUE", payload: value });
 
   return (
     <div>
-      <EntryInput onChange={handleInputChange} />
-      <Button onClick={() => send({ type: "SUBMIT" })}>Submit</Button>
+      <EntryInput handleChange={handleInputChange} handleSubmit={() => send({ type: "SUBMIT" })} />
       <EntryList entries={state.context.entries} />
     </div>
   );

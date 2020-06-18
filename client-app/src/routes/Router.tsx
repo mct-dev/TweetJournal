@@ -1,16 +1,31 @@
 import React from "react";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { RouterProps } from "react-router";
+import { Router as ReactRouter, Switch, Route } from "react-router-dom";
 
-import { Home } from "./Home/Home";
+import { Home } from "./Home";
+import { About } from "./About";
+import { Contact } from "./Contact";
 
-export function Router() {
+export const Router: React.FC<RouterProps> = ({ history }) => {
   return (
-    <BrowserRouter>
+    <ReactRouter history={history}>
       <Switch>
+        <Route path="/contact">
+          <>
+            <Contact />
+          </>
+        </Route>
+        <Route path="/about">
+          <>
+            <About />
+          </>
+        </Route>
         <Route path="/">
-          <Home />
+          <>
+            <Home />
+          </>
         </Route>
       </Switch>
-    </BrowserRouter>
+    </ReactRouter>
   );
-}
+};
