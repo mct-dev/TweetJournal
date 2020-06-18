@@ -1,0 +1,34 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Debug TweetJournal.Api",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "build-api",
+      "program": "${workspaceFolder}/TweetJournal.Api/bin/Debug/netcoreapp3.1/TweetJournal.Api.dll",
+      "args": [],
+      "cwd": "${workspaceFolder}/TweetJournal.Api",
+      "stopAtEntry": false,
+      "serverReadyAction": {
+        "action": "openExternally",
+        "pattern": "\\bNow listening on:\\s+(https?://\\S+)"
+      },
+      "env": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "launchBrowser": {
+        "enabled": true,
+        "args": "${auto-detect-url}"
+      }
+    },
+    {
+      "type": "blazorwasm",
+      "name": "Debug TweetJournal.Web",
+      "request": "launch",
+      "program": "${workspaceFolder}/TweetJournal.Web/bin/Debug/netstandard2.1/TweetJournal.Web.dll",
+      "cwd": "${workspaceFolder}/TweetJournal.Web",
+      "preLaunchTask": "build-web"
+    },
+  ]
+}

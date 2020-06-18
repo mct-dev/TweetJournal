@@ -3,17 +3,19 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29926.136
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TweetJournal.Api", "TweetJournal.Api\TweetJournal.Api.csproj", "{35297133-712D-4C7D-9668-1BEF8B848944}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TweetJournal.Api", "TweetJournal.Api\TweetJournal.Api.csproj", "{35297133-712D-4C7D-9668-1BEF8B848944}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TweetJournal.Access.Authentication", "TweetJournal.Access.Authentication\TweetJournal.Access.Authentication.csproj", "{56D65CEB-7942-4D78-95EC-A5682AFA32EB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TweetJournal.Access.Authentication", "TweetJournal.Access.Authentication\TweetJournal.Access.Authentication.csproj", "{56D65CEB-7942-4D78-95EC-A5682AFA32EB}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{9D2BEBEB-3152-4188-B60E-B315CEB8EF63}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TweetJournal.Access.Authentication.Test", "Tests\TweetJournal.Access.Authentication.Test\TweetJournal.Access.Authentication.Test.csproj", "{A68A0BFC-A3E9-40E8-9B6C-A3180A2A35E0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TweetJournal.Access.Authentication.Test", "Tests\TweetJournal.Access.Authentication.Test\TweetJournal.Access.Authentication.Test.csproj", "{A68A0BFC-A3E9-40E8-9B6C-A3180A2A35E0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TweetJournal.Access.Entries", "TweetJournal.Access.Entries\TweetJournal.Access.Entries.csproj", "{13A11866-ED88-484B-8843-E7590D5B92F8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TweetJournal.Access.Entries", "TweetJournal.Access.Entries\TweetJournal.Access.Entries.csproj", "{13A11866-ED88-484B-8843-E7590D5B92F8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TweetJournal.Api.Tests", "Tests\TweetJournal.Api.Tests\TweetJournal.Api.Tests.csproj", "{42E5530E-4018-4E26-ADA6-EF08D4DF9178}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TweetJournal.Api.Tests", "Tests\TweetJournal.Api.Tests\TweetJournal.Api.Tests.csproj", "{42E5530E-4018-4E26-ADA6-EF08D4DF9178}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TweetJournal.Web", "TweetJournal.Web\TweetJournal.Web.csproj", "{C7FC0C6D-F373-4657-8AFA-2D608F9213F4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,15 +43,19 @@ Global
 		{42E5530E-4018-4E26-ADA6-EF08D4DF9178}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{42E5530E-4018-4E26-ADA6-EF08D4DF9178}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{42E5530E-4018-4E26-ADA6-EF08D4DF9178}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C7FC0C6D-F373-4657-8AFA-2D608F9213F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C7FC0C6D-F373-4657-8AFA-2D608F9213F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C7FC0C6D-F373-4657-8AFA-2D608F9213F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C7FC0C6D-F373-4657-8AFA-2D608F9213F4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
-	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {35DEC82D-21A6-4DA9-8892-D3A900545CFA}
-	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{A68A0BFC-A3E9-40E8-9B6C-A3180A2A35E0} = {9D2BEBEB-3152-4188-B60E-B315CEB8EF63}
 		{42E5530E-4018-4E26-ADA6-EF08D4DF9178} = {9D2BEBEB-3152-4188-B60E-B315CEB8EF63}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {35DEC82D-21A6-4DA9-8892-D3A900545CFA}
 	EndGlobalSection
 EndGlobal
