@@ -1,0 +1,41 @@
+﻿@page "/"
+
+<div class="flex mb-4">
+    <div class="w-1/5"></div>
+    <div class="w-3/5">
+        <EntryInput OnSubmit="@HandleSubmitEntry" />
+    </div>
+    <div class="w-1/5"></div>
+</div>
+<div class="flex mb-4">
+    <div class="w-1/5"></div>
+    <div class="w-3/5">
+        <EntryList Entries="@Entries" />
+    </div>
+    <div class="w-1/5"></div>
+</div>
+
+@code {
+    public List<Entry> Entries = new List<Entry>
+    {
+        new Entry
+        {
+            CreatedDate = DateTime.Now,
+            Name = "First entry looks like this one.  It's pretty short."
+        },
+        new Entry
+        {
+            CreatedDate = DateTime.Now,
+            Name = "Second entry looks a little different."
+        },
+    };
+
+    private void HandleSubmitEntry(string submittedValue)
+    {
+        Entries.Add(new Entry
+        {
+            CreatedDate = DateTime.Now,
+            Name = submittedValue
+        });
+    }
+}   

@@ -1,0 +1,16 @@
+﻿@foreach (var entry in Entries)
+{
+    <div class="flex mb-4">
+        <div class="w-1/3">
+            <p>Created: @entry.CreatedDate</p>
+        </div>
+        <div class="w-2/3">
+            <p>@entry.Name</p>
+        </div>
+    </div>
+}
+
+@code {
+    [Parameter]
+    public IEnumerable<Entry> Entries { get; set; }
+}
