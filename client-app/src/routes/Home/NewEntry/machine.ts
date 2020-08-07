@@ -78,6 +78,7 @@ export const entryMachine = Machine<NEContext, NEStateSchema, NEEvent>(
       failure: {
         on: {
           CLEAR: "idle",
+          SUBMIT: "submitting",
         },
       },
     },

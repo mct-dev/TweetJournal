@@ -6,6 +6,7 @@ import { EntryInput } from "src/components/EntryInput";
 import { Button } from "src/components/Button";
 import { Entry } from "src/domain/Entry";
 import { entryMachine } from "./machine";
+import { postEntry } from "src/access/entry.access";
 
 const entries: Entry[] = [
   {
@@ -17,27 +18,18 @@ const entries: Entry[] = [
 ];
 
 const mockFetchEntries = () => {
-  return Promise.reject(new Error("problem occured while fetching entries!"));
+  return Promise.resolve([]);
 };
 
-const mockSubmitEntry = async (entry: Entry) => {
-  await fetch("");
-  return Promise.reject(new Error("problem occured while submitting entry!"));
-  // entries.push(entry);
+const submitEntry = async (content: string) => {
+  const response = await postEntry(content);
 };
-
-const buildEntry = (content: string): Entry => ({
-  id: String(Math.random() * 100000),
-  content,
-  createdDate: new Date().toLocaleString(),
-  modifiedDate: new Date().toLocaleString(),
-});
 
 export function NewEntry() {
   const [state, send, service] = useMachine(entryMachine, {
     services: {
       fetchEntries: () => mockFetchEntries(),
-      submitEntry: (context, _) => mockSubmitEntry(buildEntry(context.inputValue)),
+      submitEntry: (context, _) => submitEntry(context.inputValue),
     },
   });
 
