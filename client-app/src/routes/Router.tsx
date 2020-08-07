@@ -1,20 +1,23 @@
 import React from "react";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { RouterProps } from "react-router";
+import { Router as ReactRouter, Switch, Route } from "react-router-dom";
 
 import { Home } from "./Home";
 import { Login } from "./Login";
 
-export function Router() {
+export const Router: React.FC<RouterProps> = ({ history }) => {
   return (
-    <BrowserRouter>
+    <ReactRouter history={history}>
       <Switch>
         <Route path="/login">
           <Login />
         </Route>
         <Route path="/">
-          <Home />
+          <>
+            <Home />
+          </>
         </Route>
       </Switch>
-    </BrowserRouter>
+    </ReactRouter>
   );
-}
+};

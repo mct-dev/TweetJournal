@@ -35,9 +35,10 @@ export function NewEntry() {
 
   useEffect(() => {
     const subscription = service.subscribe((state) => {
-      console.log(state);
+      console.log(state.context);
     });
 
+    // eslint-disable-next-line @typescript-eslint/unbound-method
     return subscription.unsubscribe;
   }, [service]);
 
@@ -45,13 +46,11 @@ export function NewEntry() {
     send({ type: "FETCH" });
   }, [send]);
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) =>
-    send({ type: "SET_INPUT_VALUE", payload: e.target.value });
+  const handleInputChange = (value: string) => send({ type: "SET_INPUT_VALUE", payload: value });
 
   return (
     <div>
-      <EntryInput onChange={handleInputChange} />
-      <Button onClick={() => send({ type: "SUBMIT" })}>Submit</Button>
+      <EntryInput handleChange={handleInputChange} handleSubmit={() => send({ type: "SUBMIT" })} />
       <EntryList entries={state.context.entries} />
     </div>
   );

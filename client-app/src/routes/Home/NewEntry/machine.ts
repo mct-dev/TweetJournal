@@ -41,7 +41,7 @@ export const entryMachine = Machine<NEContext, NEStateSchema, NEEvent>(
         on: {
           FETCH: "fetching",
           SET_INPUT_VALUE: {
-            actions: ["setInputValue"],
+            actions: "setInputValue",
           },
           SUBMIT: "submitting",
         },
@@ -51,12 +51,16 @@ export const entryMachine = Machine<NEContext, NEStateSchema, NEEvent>(
           src: "submitEntry",
           onDone: {
             target: "idle",
+            actions: ["resetInputValue"],
           },
           onError: {
             target: "failure",
-            actions: assign({
-              errorMessage: (_, { data }) => data,
-            }),
+            actions: [
+              "resetInputValue",
+              assign({
+                errorMessage: (_, { data }) => data,
+              }),
+            ],
           },
         },
       },
@@ -87,6 +91,9 @@ export const entryMachine = Machine<NEContext, NEStateSchema, NEEvent>(
     actions: {
       setInputValue: assign<NEContext, any>({
         inputValue: (_, { payload }) => payload,
+      }),
+      resetInputValue: assign<NEContext, any>({
+        inputValue: "",
       }),
       setEntries: assign<NEContext, any>({
         entries: (_, { data }) => data,
