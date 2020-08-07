@@ -1,6 +1,10 @@
 {
   "name": "tweetjournal.web.styles",
   "version": "1.0.0",
+  "scripts": {
+    "build": "gulp css",
+    "build:watch": "gulp css:watch"
+  },
   "devDependencies": {
     "autoprefixer": "^9.8.6",
     "gulp": "^4.0.2",
