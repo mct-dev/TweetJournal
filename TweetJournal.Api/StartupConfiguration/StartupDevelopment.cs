@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using TweetJournal.Access.Entries;
 using TweetJournal.Api.Options;
 
 namespace TweetJournal.Api.StartupConfiguration
@@ -24,6 +25,12 @@ namespace TweetJournal.Api.StartupConfiguration
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            using (var servicesScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
+            {
+                var context = servicesScope.ServiceProvider.GetRequiredService<EntryContext>();
+                context.Database.EnsureCreated();
+            }
+
             app.UseDeveloperExceptionPage();
 
             UseSwagger(app);
