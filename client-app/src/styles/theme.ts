@@ -13,13 +13,7 @@ export type ColorContrast =
   | "warningContrast"
   | "dangerContrast";
 
-export type Shade =
-  | "grayDarker"
-  | "grayDark"
-  | "gray"
-  | "grayLight"
-  | "grayLighter"
-  | "grayLightest";
+export type Shade = "grayDarker" | "grayDark" | "gray" | "grayLight" | "grayLighter" | "grayLightest";
 
 export type Variant =
   | "light"
@@ -79,8 +73,7 @@ interface Theme
   textStrongColor: string;
 }
 
-const contrastColor = (color: string) =>
-  getLuminance(color) > 0.55 ? hsla(0, 0, 0, 0.7) : hsl(0, 0, 1);
+const contrastColor = (color: string) => (getLuminance(color) > 0.55 ? hsla(0, 0, 0, 0.7) : hsl(0, 0, 1));
 
 const grayDarker = hsl(0, 0, 0.18);
 const grayDark = hsl(0, 0, 0.29);
