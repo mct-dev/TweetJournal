@@ -24,10 +24,10 @@
     },
     {
       "type": "blazorwasm",
-      "name": "Debug TweetJournal.Web",
+      "name": "Debug TweetJournal.Client",
       "request": "launch",
-      "program": "${workspaceFolder}/TweetJournal.Web/bin/Debug/netstandard2.1/TweetJournal.Web.dll",
-      "cwd": "${workspaceFolder}/TweetJournal.Web",
+      "program": "${workspaceFolder}/TweetJournal.Client/bin/Debug/netstandard2.1/TweetJournal.Client.dll",
+      "cwd": "${workspaceFolder}/TweetJournal.Client",
       "preLaunchTask": "build-web"
     },
   ]

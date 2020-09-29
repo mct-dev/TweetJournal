@@ -13,7 +13,7 @@
         "/property:GenerateFullPaths=true",
         // Do not generate summary otherwise it leads to duplicate errors in Problems panel
         "/consoleloggerparameters:NoSummary",
-        "${workspaceFolder}/TweetJournal.Web/TweetJournal.Web.csproj"
+        "${workspaceFolder}/TweetJournal.Client/TweetJournal.Client.csproj"
       ],
       "group": "build",
       "presentation": {

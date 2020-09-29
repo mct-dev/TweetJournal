@@ -15,7 +15,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TweetJournal.Access.Entries
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TweetJournal.Api.Tests", "Tests\TweetJournal.Api.Tests\TweetJournal.Api.Tests.csproj", "{42E5530E-4018-4E26-ADA6-EF08D4DF9178}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TweetJournal.Web", "TweetJournal.Web\TweetJournal.Web.csproj", "{C7FC0C6D-F373-4657-8AFA-2D608F9213F4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TweetJournal.Client", "TweetJournal.Client\TweetJournal.Client.csproj", "{AD552E42-B949-4EC3-B031-47B76268EF55}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -43,10 +43,10 @@ Global
 		{42E5530E-4018-4E26-ADA6-EF08D4DF9178}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{42E5530E-4018-4E26-ADA6-EF08D4DF9178}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{42E5530E-4018-4E26-ADA6-EF08D4DF9178}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C7FC0C6D-F373-4657-8AFA-2D608F9213F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C7FC0C6D-F373-4657-8AFA-2D608F9213F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C7FC0C6D-F373-4657-8AFA-2D608F9213F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C7FC0C6D-F373-4657-8AFA-2D608F9213F4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD552E42-B949-4EC3-B031-47B76268EF55}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD552E42-B949-4EC3-B031-47B76268EF55}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD552E42-B949-4EC3-B031-47B76268EF55}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD552E42-B949-4EC3-B031-47B76268EF55}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

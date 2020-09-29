@@ -1,4 +1,6 @@
 ﻿@page "/"
+@using TweetJournal.Client.Services
+@inject IEntryService EntryService
 
 <div class="flex mb-4">
     <div class="w-1/5"></div>
@@ -16,7 +18,7 @@
 </div>
 
 @code {
-    public List<Entry> Entries = new List<Entry>();
+    private List<Entry> Entries = new List<Entry>();
 
     private void HandleSubmitEntry(string submittedValue)
     {
@@ -27,8 +29,12 @@
         });
     }
 
-    private IEnumerable<Entry> GetEntries(string baseUrl)
+    protected override async Task OnInitializedAsync()
     {
-
+        var response = await EntryService.GetAllAsync();
+        if (!response.IsError)
+        {
+            Entries = response.Result.ToList();
+        }
     }
 }   

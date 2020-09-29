@@ -1,0 +1,24 @@
+﻿<input
+    class="@classes"
+    @bind="@inputValue"
+    @bind:event="oninput"
+    placeholder="What's on your mind?"
+    @onkeydown="@HandleKeyDown"
+/>
+
+@code {
+    [Parameter]
+    public EventCallback<string> OnSubmit { get; set; }
+    private string inputValue = "";
+    private string classes = "bg-white focus:outline-none border border-gray-300 rounded-lg py-2 px-4 w-full";
+
+    private async void HandleKeyDown(KeyboardEventArgs args)
+    {
+        System.Diagnostics.Debug.WriteLine(inputValue);
+        if (args.Key == "Enter")
+        {
+            await OnSubmit.InvokeAsync(inputValue);
+            inputValue = "";
+        }
+    }
+}
