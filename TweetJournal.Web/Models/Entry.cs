@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace TweetJournal.Web.Models
+namespace TweetJournal.Client.Models
 {
     public class Entry
     {
